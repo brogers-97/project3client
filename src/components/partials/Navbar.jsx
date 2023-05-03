@@ -27,6 +27,7 @@ export default function Navbar({ currentUser, handleLogout }) {
 		</>
 	)
 
+
 	return (
 		<nav>
 			{/* user always sees this section */}
