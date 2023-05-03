@@ -4,13 +4,14 @@ import Login from './components/pages/Login'
 import Profile from './components/pages/Profile'
 import Register from './components/pages/Register'
 import Welcome from './components/pages/Welcome'
-import Navbar from './components/Navbar'
+import Navbar from './components/partials/Navbar'
 import './App.css'
 import jwt_decode from 'jwt-decode'
 import Home from './components/pages/Home'
 import New from './components/pages/New'
 import Search from './components/pages/Search'
-import Post from './components/pages/Post'
+import Post from './components/partials/Post'
+import PostDetails from './components/pages/PostDetails'
 
 function App() {
     // the currently logged in user will be stored up here in state
@@ -99,6 +100,11 @@ function App() {
                             </>
                         }
                     />
+
+					<Route 
+						path='/post-details'
+						element={<PostDetails />}
+					/>
 
                     <Route path="/search" element={<Search />} />
                 </Routes>
