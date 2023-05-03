@@ -64,4 +64,9 @@ limits at 20,000 calls per month
 * Add games to a list of favorites
 
 ## Potential Roadblocks
-* 
+
+* Using Cors for the first time might give us bugs.
+* State managment might take a little bit more than we predict.
+* Conditionally rendering on the same component can be difficult.
+* Having a dynamic display that is also user intuitive.
+* The pure volume components can be hard to manage and navigate.
