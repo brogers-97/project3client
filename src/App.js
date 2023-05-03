@@ -11,6 +11,10 @@ import Welcome from './components/pages/Welcome'
 import Navbar from './components/Navbar'
 import './App.css'
 import jwt_decode from 'jwt-decode'
+import Home from './components/pages/Home'
+import New from './components/pages/New'
+import Search from './components/pages/Search'
+import Post from './components/pages/Post'
 
 function App() {
 	// the currently logged in user will be stored up here in state
@@ -69,6 +73,32 @@ function App() {
 						path="/profile"
 						element={<Profile handleLogout={handleLogout} currentUser={currentUser} setCurrentUser={setCurrentUser} />}
 					/>
+
+					<Route 
+						path='/home'
+						element={
+							<>
+								<Home />
+								<Post />
+							</>
+						}
+					/>
+
+					<Route 
+						path='/new'
+						element={
+							<>
+								<New />
+								<Post />
+							</>
+						}
+					/>
+
+					<Route 
+						path='/search'
+						element={<Search />}
+					/>
+
 				</Routes>
 			</div>
 		</Router>
