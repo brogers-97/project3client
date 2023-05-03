@@ -20,12 +20,12 @@ limits at 20,000 calls per month
 | POST   | /users/register    | Create  | Create new user in DB                                                 | Directs to profile                                                        |
 | POST   | /users/login       | Read    | Log in user                                                           | Directs to profile                                                        |
 | GET    | /users/:id         | Read    |                                                                       | Directs to a user profile page for user :id that shows posts by that user |
-| PUT    | /users/            | Update  | Update information about a specific user (restrict to logged-in user) |                                                                           |
-| DELETE | /users/            | Destroy | Delete a user                                                         |                                                                           |
+| PUT    | /users            | Update  | Update information about a specific user (restrict to logged-in user) |                                                                           |
+| DELETE | /users            | Destroy | Delete a user                                                         |                                                                           |
 | GET    | /posts             | Read    | Fetches X number of posts starting from newest                        | Shows newest posts                                                        |
 | POST   | /posts             | Create  | Create new post in DB                                                 | Directs to page for new post                                              |
 | GET    | /posts/:id         | Read    | Fetches a post from the DB                                            |                                                                           |
-| PUT    | /posts/            | Update  | Update a specific post                                                |                                                                           |
+| PUT    | /posts            | Update  | Update a specific post                                                |                                                                           |
 | DELETE | /posts             | Destroy | Delete a post                                                         |                                                                           |
 | GET    | /games             | n/a     | Asks server to query the RAWG API for a list of games                 | Populates search page with results                                        |                                       |
 
