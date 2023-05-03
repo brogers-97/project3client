@@ -8,11 +8,28 @@
 RAWG API - https://api.rawg.io/docs/
 limits at 20,000 calls per month
 
-![RawrAPI](./public/images/rawr.api.png)
+![RawgAPI](./public/images/rawr.api.png)
+---
+## RESTful Routing Chart
+![RESTful Routing Chart]()
+---
+## ERD
+![ERD]()
+---
+## Wireframe
+![Wireframe](./public/images/wireframe.png)
 
 ## User Stories 
-* User needs to be able to create an account and log in so that they can have a personalized experience
-* User needs to be able to add a video game with basic information (title, developer, release date, and cover image) so that they can keep track of their favorite games
-* User needs to be able to delete a video game if it's no longer of interest or if they made a mistake when adding it
-* User needs to be able to post comments and reviews about their favorite video games, including a rating system, so that they can share their opinions with others
-* User needs to be able to view a list of comments and reviews made by themselves and others for each video game so that they can easily see what others think about the games
+* As a user, I want to create an account and log in so that I have a personalized experience.
+* As a gamer, I want to make posts expressing my thoughts about my favorite (or least favorite!) games.
+* As a poster, I want to search a comprehensive database of games so that I can select the one that I want to make a post or review about.
+* As a poster, I want to make posts that don't have to be tied to one specific game so that I can express myself in a more open-ended/freeform way.
+* As a reader, I want to browse posts by users so that I can enjoy seeing other people's thoughts about various games.
+* As a reader, I want to make comments on the posts I read so that I can be a participant in the discussions.
+* As a poster, I want to see a list of my own posts on my profile so that I can easily view all of my previous posts.
+* As a user, I want to view other users' profiles so that I can easily view all of *their* previous posts.
+## MVP
+
+## Stretches
+
+## Potential Roadblocks
