@@ -10,12 +10,15 @@ export default function Search() {
     const [gameClicked, setGameClicked] = useState(false)
 
     useEffect(() => {
-        const url = `https://api.rawg.io/api/games?key=${process.env.REACT_APP_API_KEY}&page_size=10&search=${game}`
+        if (game) {
+        const url = `${process.env.REACT_APP_SERVER_URL}/games?search=${game}`
         axios.get(url)
             .then(response => {
+                console.log(response.data.results)
                 setGameData(response.data.results)
             })
             .catch(console.warn)
+        }
     },[game])
 
 
@@ -23,7 +26,7 @@ export default function Search() {
         return(
             <div key={i} onClick={() => handleGameClick(game.id)}>
                 <h1>{game.name}</h1>
-                <p> Release Year: {game.released.split('-')[0]}</p>
+                <p> Release Year: {game.released ? (game.released.split('-')[0]) : ('Unknown') }</p>
                 
             </div>
         )
@@ -31,7 +34,7 @@ export default function Search() {
 
 
     const handleGameClick = (e) => {
-        const url = `https://api.rawg.io/api/games/${e}?key=${process.env.REACT_APP_API_KEY}`
+        const url = `${process.env.REACT_APP_SERVER_URL}/game/details?id=${e}`
         axios.get(url)
             .then( response => {
                 setGameDetails(response.data)
@@ -46,8 +49,8 @@ export default function Search() {
         const searchInput = document.getElementById('search-input')
         const searched = searchInput.value 
         setGame(searched)
-        
     }
+
 
     // console.log('games',gameData)
 
@@ -66,7 +69,13 @@ export default function Search() {
 
                 <div className='right'>
                     {gameClicked && gameDetails ? (
-                        <h2>{gameDetails.name}</h2>
+                        <div>
+                            <h2>{gameDetails.name}</h2>
+                            <img className='game-img' src={gameDetails.background_image} alt={`image of${gameDetails.name}`} />
+                            {/* <div dangerouslySetInnerHTML={{__html: gameDetails.description}}></div> */}
+                            
+
+                        </div>
                     ) : (
                         <p>no details</p>
                     )}

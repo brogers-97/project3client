@@ -13,6 +13,7 @@ export default function New() {
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_SERVER_URL}}/post/${id}`)
         .then(response => {
+            console.log(response)
             setInputData(response.data.result)
         })
         .catch(console.warn)
@@ -55,11 +56,11 @@ export default function New() {
 
     const details = (
         <>
-            <h1>{postTitle}</h1>
+            {/* <h1>{postTitle}</h1>
             <p>{taggedGame}</p>
             <p>{rating}</p>
             <h2>{postBody}</h2>
-            <h2>{imageUrl}</h2>
+            <h2>{imageUrl}</h2> */}
 
 
             <button onClick={handleDeleteClick}>Delete Bounty</button>
