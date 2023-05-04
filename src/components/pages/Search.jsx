@@ -10,7 +10,7 @@ export default function Search() {
     const [gameClicked, setGameClicked] = useState(false)
 
     useEffect(() => {
-        const url = `https://api.rawg.io/api/games?key=974a7e3a2bb142c7be0f2b4cbfed4dfe&page_size=10&search=${game}`
+        const url = `https://api.rawg.io/api/games?key=${process.env.REACT_APP_API_KEY}&page_size=10&search=${game}`
         axios.get(url)
             .then(response => {
                 setGameData(response.data.results)
@@ -31,7 +31,7 @@ export default function Search() {
 
 
     const handleGameClick = (e) => {
-        const url = `https://api.rawg.io/api/games/${e}?key=974a7e3a2bb142c7be0f2b4cbfed4dfe`
+        const url = `https://api.rawg.io/api/games/${e}?key=${process.env.REACT_APP_API_KEY}`
         axios.get(url)
             .then( response => {
                 setGameDetails(response.data)
