@@ -22,9 +22,9 @@ export default function PostForm(props) {
                     <input 
                         type="text"
                         placeholder="enter name"
-                        id="title"
-                        value={form.title}
-                        onChange={e => setForm({...form, title: e.target.value})}
+                        id="postTitle"
+                        value={form.postTitle}
+                        onChange={e => setForm({...form, postTitle: e.target.value})}
                     />
                 </div>
                 <div>

@@ -12,6 +12,7 @@ import New from './components/pages/New'
 import Search from './components/pages/Search'
 import Post from './components/partials/Post'
 import PostDetails from './components/pages/PostDetails'
+import PostForm from './components/partials/PostForm'
 
 function App() {
     // the currently logged in user will be stored up here in state
