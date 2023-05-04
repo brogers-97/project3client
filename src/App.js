@@ -84,22 +84,12 @@ function App() {
 
                     <Route
                         path="/home"
-                        element={
-                            <>
-                                <Home />
-                                <Post />
-                            </>
-                        }
+                        element={<Home />}
                     />
 
                     <Route
                         path="/new"
-                        element={
-                            <>
-                                <New />
-                                <Post />
-                            </>
-                        }
+                        element={<New />}
                     />
 
 					<Route 
