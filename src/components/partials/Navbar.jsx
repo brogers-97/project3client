@@ -27,9 +27,10 @@ export default function Navbar({ currentUser, handleLogout }) {
 		</>
 	)
 
+	const border = { 'border-bottom': '2px solid black' }
 
 	return (
-		<nav>
+		<nav style={border}>
 			{/* user always sees this section */}
 			<Link to="/">
 				<p>User App</p>
