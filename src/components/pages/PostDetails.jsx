@@ -68,7 +68,7 @@ export default function PostDetails() {
 
     const loaded = (
         <>
-            <Post post={post} />
+            <Post post={post} author={"Andrew"} />
         </>
     )
 
