@@ -97,7 +97,11 @@ function App() {
 						element={<PostDetails />}
 					/>
 
-                    <Route path="/search" element={<Search />} />
+                    <Route
+                         path="/search" 
+                         element={<Search 
+                            currentUser={currentUser}
+                            setCurrentUser={setCurrentUser}/>} />
                 </Routes>
             </div>
         </Router>
