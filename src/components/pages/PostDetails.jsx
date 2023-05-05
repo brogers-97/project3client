@@ -24,16 +24,28 @@ export default function PostDetails() {
             .catch(console.warn)
     }, [])
 
-    // const handleSubmit = async (e, form) => {
-    //     e.preventDefault()
-    //     try {
-    //         const putResponse = await axios.put(`${process}/posts/${id}`)
-    //         setPost(putResponse.data)
-    //         setShowForm(false)
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    // }
+    const handleSubmit = async (e, form) => {
+        e.preventDefault()
+        try {
+            const token = localStorage.getItem('jwt')
+            // make the auth headers
+            const options = {
+                headers: {
+                    Authorization: token,
+                },
+            }
+            const response = await axios.put(
+                `${process.env.REACT_APP_SERVER_URL}/posts`,
+                form,
+                options
+            )
+            // const userPosts = await axios.get(`${process.env.REACT_APP_SERVER_URL}/posts`)
+            setPost(response.data)
+            setShowForm(false)
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     // const handleDeleteClick = async () => {
     //     try {
@@ -47,38 +59,6 @@ export default function PostDetails() {
     //         console.log(err)
     //     }
     // }
-
-    // const initialState = {
-    //     postTitle: post.postTitle,
-    //     postBody: post.postBody,
-    //     taggedGame: post.taggedGame,
-    //     rating: post.rating,
-    //     imageUrl: post.imageUrl,
-    // }
-
-    // const details = (
-    //     <>
-    //         {/* <h1>{postTitle}</h1>
-    //         <p>{taggedGame}</p>
-    //         <p>{rating}</p>
-    //         <h2>{postBody}</h2>
-    //         <h2>{imageUrl}</h2> */}
-
-    //         <button onClick={handleDeleteClick}>Delete Bounty</button>
-    //     </>
-    // )
-
-    // const form = (
-    //     <>
-    //         <h1>Post Edit Form for {post.postTitle}</h1>
-
-    //         <PostForm
-    //             initialState={initialState}
-    //             handleSubmit={handleSubmit}
-    //             handelCancelClick={() => setShowForm(false)}
-    //         />
-    //     </>
-    // )
 
     const loading = (
         <div>
@@ -103,12 +83,11 @@ export default function PostDetails() {
     const formView = (
         <>
             <p>this is where we edit the post</p>
-            <PostForm initialState={post} />
-            <button onClick={() => setShowForm(false)}>Back to post</button>
-            {/* {!showForm && (
-                <button onClick={() => setShowForm(true)}>Edit</button>
-                )}
-            {showForm ? form : details} */}
+            <PostForm
+                initialState={post}
+                handleSubmit={handleSubmit}
+                handleCancel={() => setShowForm(false)}
+            />
         </>
     )
 
