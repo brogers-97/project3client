@@ -83,7 +83,7 @@ export default function PostForm(props) {
 
             </form>
 
-            <button onClick={props.handleCancelClick}> Cancel </button>
+            <button onClick={props.handleCancel}> Cancel </button>
         </div>
     )
 }
