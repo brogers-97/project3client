@@ -1,12 +1,22 @@
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import '../../App.css'
+import jwt_decode from 'jwt-decode'
+const token = localStorage.getItem('jwt')
+let userId;
 
-export default function Search() {
+export default function Search(props) {
     const [game, setGame] = useState()
     const [gameData, setGameData] = useState([])
     const [gameDetails, setGameDetails] = useState()
     const [gameClicked, setGameClicked] = useState(false)
+    const [currentUser, setCurrentUser] = useState()
+    const [showFave, setShowFave] = useState()
+
+    useEffect(() => {
+        setCurrentUser(props.currentUser)
+    },[props.currentUser])
+
 
     useEffect(() => {
         if (game) {
@@ -14,12 +24,16 @@ export default function Search() {
             axios
                 .get(url)
                 .then((response) => {
-                    console.log(response.data.results)
                     setGameData(response.data.results)
                 })
                 .catch(console.warn)
         }
     }, [game])
+
+    useEffect(() => {
+
+    })
+
 
     const displayGames = gameData.map((game, i) => {
         return (
@@ -43,7 +57,6 @@ export default function Search() {
             })
             .catch(console.warn)
         setGameClicked(true)
-        console.log('click', e)
     }
 
     const handleSearchClick = (e) => {
@@ -53,7 +66,46 @@ export default function Search() {
         setGame(searched)
     }
 
-    // console.log('games',gameData)
+    useEffect(() => {
+        const decoded = jwt_decode(token)
+        userId = decoded._id
+    },[])
+    
+    const handleFavoriteClick = async () => {
+        const gameId = gameDetails.id
+        let tempUser = currentUser
+        const gameIndex = tempUser.favoriteGames.indexOf(gameId)
+        if(gameIndex !== -1) {
+            tempUser.favoriteGames.splice(gameIndex, 1)
+        }else{
+            tempUser.favoriteGames.push(gameId)
+        }
+        setCurrentUser(tempUser)
+        console.log('gameId',gameId)
+        console.log(currentUser)
+
+        if(currentUser.favoriteGames.includes(gameId)){
+            setShowFave(true)
+        } else{
+            setShowFave(false)
+        }
+
+        try{
+            const options = {
+                headers: {
+                    Authorization: token,
+                },
+            }
+            const response = await axios.put(
+                `${process.env.REACT_APP_SERVER_URL}/users`, currentUser,
+                options
+            )
+            console.log(response)
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
 
     return (
         <div>
@@ -77,6 +129,9 @@ export default function Search() {
                                 alt={`image of${gameDetails.name}`}
                             />
                             {/* <div dangerouslySetInnerHTML={{__html: gameDetails.description}}></div> */}
+                            {}
+                            {showFave ? (<button onClick={handleFavoriteClick}>Un-Favorite</button>) : <button onClick={handleFavoriteClick}>Favorite</button>}
+                            {/* <button onClick={handleFavoriteClick}>Favorite</button> */}
                         </div>
                     ) : (
                         <p>no details</p>

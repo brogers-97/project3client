@@ -4,6 +4,7 @@ import jwt_decode from 'jwt-decode'
 import Post from '../partials/Post'
 import axios from 'axios'
 import '../../profile.css'
+import Setting from '../partials/Settings'
 const token = localStorage.getItem('jwt')
 let userId;
 
@@ -111,6 +112,12 @@ export default function Profile({ currentUser, handleLogout }) {
                     {renderPost}
                 </div>
             </div>
+            <div>
+                <Setting 
+                    currentUser={currentUser}
+                />
+            </div>
+
 
         </div>
     )
