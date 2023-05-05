@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import PostForm from '../partials/PostForm'
 import axios from 'axios'
+import Post from '../partials/Post'
+import PostForm from '../partials/PostForm'
 
 export default function PostDetails() {
     const [post, setPost] = useState({})
@@ -15,7 +16,6 @@ export default function PostDetails() {
         axios
             .get(`${process.env.REACT_APP_SERVER_URL}/posts/${id}`)
             .then((response) => {
-                console.log(response.data)
                 setPost(response.data)
                 if (post !== {}) {
                     setPostLoaded(true)
@@ -87,18 +87,35 @@ export default function PostDetails() {
     )
 
     const loaded = (
-        <div>
-            <p>{post.postBody}</p>
-        </div>
+        <>
+            <Post post={post} />
+        </>
     )
 
-    return (
+    const postView = (
         <>
             {postLoaded ? loaded : loading}
+            {/* need to lock this button to the logged-in user if they are the author of the post */}
+            <button onClick={() => setShowForm(true)}>Edit</button>
+        </>
+    )
+
+    const formView = (
+        <>
+            <p>this is where we edit the post</p>
+            <PostForm initialState={post} />
+            <button onClick={() => setShowForm(false)}>Back to post</button>
             {/* {!showForm && (
                 <button onClick={() => setShowForm(true)}>Edit</button>
                 )}
             {showForm ? form : details} */}
         </>
     )
+
+    /* if the user is NOT editing the post, showForm is false:
+    return a view that includes the Post component for the post whose ID was passed as a param
+    
+    if the user IS editing the post, showForm is true: return a view that includes the PostForm
+    component and sending it as props the post whose ID was passed as a param */
+    return showForm ? formView : postView
 }
