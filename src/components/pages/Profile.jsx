@@ -1,62 +1,117 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import jwt_decode from 'jwt-decode'
+import Post from '../partials/Post'
 import axios from 'axios'
+import '../../profile.css'
+const token = localStorage.getItem('jwt')
+let userId;
 
 export default function Profile({ currentUser, handleLogout }) {
-    // state for the secret message (aka user privilaged data)
-    const [msg, setMsg] = useState('')
 
+    const [msg, setMsg] = useState('')
+    const [usersPosts, setUsersPosts] = useState([])
     const navigate = useNavigate()
 
     // useEffect for getting the user data and checking auth
     useEffect(() => {
         const fetchData = async () => {
             try {
-                // get the token from local storage
                 const token = localStorage.getItem('jwt')
-                // make the auth headers
                 const options = {
                     headers: {
                         Authorization: token,
                     },
                 }
-                // hit the auth locked endpoint
+                
                 const response = await axios.get(
                     `${process.env.REACT_APP_SERVER_URL}/users/auth-locked`,
                     options
                 )
-                // example POST with auth headers (options are always last argument)
-                // await axios.post(url, requestBody (form data), options)
-                // set the secret user message in state
+                
                 setMsg(response.data.msg)
+
             } catch (err) {
-                // if the error is a 401 -- that means that auth failed
                 console.warn(err)
                 if (err.response) {
                     if (err.response.status === 401) {
-                        // panic!
                         handleLogout()
-                        // send the user to the login screen
                         navigate('/login')
                     }
                 }
             }
         }
         fetchData()
-    }, [handleLogout, navigate]) // only fire on the first render of this component
+    }, [handleLogout, navigate])
+
+
+    useEffect(() => {
+        const url = `${process.env.REACT_APP_SERVER_URL}/posts`
+        axios.get(url)
+            .then(response => {
+                setUsersPosts(response.data)
+            })
+            .catch(console.warn)
+    }, [])
+
+
+    useEffect(() => {
+        const decoded = jwt_decode(token)
+        console.log(decoded.name)
+        userId = decoded._id
+    },[])
+    
+    
+    const renderPost = usersPosts.map((post, i) => {
+        if(post.poster === userId)
+        return (
+            <Post key={i} post={post}/>
+        )
+    })
+
+    const renderReviews = usersPosts.map((post, i) => {
+        if(post.poster === userId && post.isReview == true){
+            return(
+                <li>{post.postBody}</li>
+            )
+        }
+    })
+    
+
 
     return (
-        <div>
-            <h1>Hello, {currentUser?.name}</h1>
 
-            <p>your email is {currentUser?.email}</p>
+        <div className='profile-container'>
 
-            <h2>
-                Here is the secret message that is only availible to users of
-                User App:
-            </h2>
+            <div className='profile-left'>
 
-            <h3>{msg}</h3>
+                <h1>Hello {currentUser?.name}</h1>
+
+                <div className='favorites'>
+                    <div className='favorite-game'>
+
+                    </div>
+                </div>
+
+                <div className='reviews'>
+                    <div className='recent-reviews'>
+                        <h2>Recent Reviews</h2>
+                    </div>
+                    <ul>
+                        {renderReviews}
+                    </ul>
+                </div>
+
+            </div>
+            
+
+
+            <div className='profile-post'>
+                <div className='post-container'>
+                    {renderPost}
+                </div>
+            </div>
+
         </div>
     )
 }

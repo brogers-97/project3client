@@ -1,0 +1,52 @@
+.profile-container{
+    display: flex;
+    flex-direction: row;
+}
+.profile-post{
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    width: 50%;
+    border-left: 1px solid black;
+    background-color: #807b71;
+}
+.profile-left{
+    width: 50%;
+}
+.favorites{
+    border: 1px solid black;
+    border-radius: 5%;
+    margin: auto;
+    max-width: 400px;
+    width: 80%;
+    height: 95px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.15);
+    background-color: rgb(171, 164, 151);
+}
+.reviews{
+    border: 1px solid black;
+    border-radius: 5%;
+    margin: 15px auto;
+    max-width: 400px;
+    width: 80%;
+    height: 300px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.15);
+    background-color: rgb(171, 164, 151);
+}
+.post-container{
+    height: 75%;
+    width: 75%;
+}
+.recent-reviews{
+    border-bottom: 1px solid black;
+}
+.favorites{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.favorite-game{
+    border: 1px solid black;
+    height: 80px;
+    width: 80px;
+}
