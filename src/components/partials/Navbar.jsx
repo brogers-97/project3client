@@ -43,12 +43,18 @@ export default function Navbar({ currentUser, handleLogout }) {
                     </div>
                 </div>
 
-                <div className="nav-right">
-                    <div className="btn">
-                        <Link to="/profile">
-                            <p>profile</p>
-                        </Link>
-                    </div>
+				<div className='nav-right'>
+				<div className='btn'>
+						<Link to="/search">
+							<p>Search</p>
+						</Link>
+					</div>
+					
+					<div className='btn'>
+						<Link to="/profile">
+							<p>profile</p>
+						</Link>
+					</div>
 
                     <div className="btn">
                         <Link to="/">

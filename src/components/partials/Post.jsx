@@ -1,6 +1,5 @@
 export default function Post({ post, author }) {
     const border = { border: '1px solid black' }
-    console.log(post)
 
     return (
         <div style={border}>
