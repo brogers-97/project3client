@@ -13,6 +13,7 @@ import Search from './components/pages/Search'
 import Post from './components/partials/Post'
 import PostDetails from './components/pages/PostDetails'
 import PostForm from './components/partials/PostForm'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
     // the currently logged in user will be stored up here in state

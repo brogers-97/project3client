@@ -1,161 +1,47 @@
-import { Link } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
-import '../../navbar.css'
-import Dropdown from './Dropdown'
+import Container from 'react-bootstrap/Container'
+import Nav from 'react-bootstrap/Nav'
+import BootstrapNavbar from 'react-bootstrap/Navbar'
+import NavDropdown from 'react-bootstrap/NavDropdown'
 
 export default function Navbar({ currentUser, handleLogout }) {
-    const navigate = useNavigate()
-    const [value, setValue] = useState('')
-    const [menuOpen, setMenuOpen] = useState(false)
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-
     const loggedInNavbarItems = (
         <>
-            {/* Responsive button -- appears on small screens */}
-            <button
-                data-collapse-toggle="navbar-dropdown"
-                onClick={() => {
-                    setMobileMenuOpen(!mobileMenuOpen)
-                }}
-                type="button"
-                class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                aria-controls="navbar-dropdown"
-                aria-expanded="true"
-            >
-                <span class="sr-only">Open main menu</span>
-                <svg
-                    class="w-6 h-6"
-                    aria-hidden="true"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
-                    <path
-                        fill-rule="evenodd"
-                        d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                        clip-rule="evenodd"
-                    ></path>
-                </svg>
-            </button>
-            {/* this div allows the menu to be hidden on mobile
-			devices if hamburger button hasn't been clicked */}
-            <div
-                className={`${
-                    mobileMenuOpen ? null : `hidden`
-                } w-full md:block md:w-auto`}
-                id="navbar-dropdown"
-            >
-                <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                    <li>
-                        <a
-                            href="/home"
-                            class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent"
-                            aria-current="page"
-                        >
-                            Home
-                        </a>
-                    </li>
-                    <li>
-                        <button
-                            onClick={() => {
-                                setMenuOpen(!menuOpen)
-                            }}
-                            class="flex items-center justify-between w-full py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
-                        >
-                            Make a post{' '}
-                            <svg
-                                class="w-5 h-5 ml-1"
-                                aria-hidden="true"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    fill-rule="evenodd"
-                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                    clip-rule="evenodd"
-                                ></path>
-                            </svg>
-                        </button>
-                        {menuOpen ? (
-                            <Dropdown
-                                anchorOrigin={{
-                                    vertical: 'bottom',
-                                    horizontal: 'left',
-                                }}
-                            />
-                        ) : null}
-                    </li>
-                    <li>
-                        <a
-                            href="/search"
-                            class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                        >
-                            Search
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            href="/profile"
-                            class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                        >
-                            Profile
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            href="/"
-                            class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                        >
-                            <p onClick={handleLogout}>Log Out</p>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+            <NavDropdown title="Make a post" id="basic-nav-dropdown">
+                <NavDropdown.Item href="/search">About a game</NavDropdown.Item>
+                <NavDropdown.Item href="/new">
+                    About something else
+                </NavDropdown.Item>
+            </NavDropdown>
+            <Nav.Link href="/search">Search</Nav.Link>
+            <Nav.Link href="/profile">Profile</Nav.Link>
+            <Nav.Link href="#" onClick={handleLogout}>
+                Log Out
+            </Nav.Link>
         </>
     )
 
     const loggedOutNavbarItems = (
         <>
-            <div class="hidden w-full md:block md:w-auto" id="navbar-dropdown">
-                <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                    <li>
-                        <a
-                            href="/register"
-                            class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                        >
-                            Register
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            href="/login"
-                            class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                        >
-                            <p>Log In</p>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+            <Nav.Link href="/register">Register</Nav.Link>
+            <Nav.Link href="/login">Log in</Nav.Link>
         </>
     )
 
-    const navbarFrame = (
-        <>
-            <nav class="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700">
-                <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-                    <div class="flex items-center">
-                        <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-                            Joystick Junkies
-                        </span>
-                    </div>
-
-                    {currentUser ? loggedInNavbarItems : loggedOutNavbarItems}
-                </div>
-            </nav>
-        </>
+    return (
+        <BootstrapNavbar bg="dark" variant="dark" expand="lg">
+            <Container>
+                <BootstrapNavbar.Brand href="/home">
+                    Joystick Junkies
+                </BootstrapNavbar.Brand>
+                <BootstrapNavbar.Toggle aria-controls="responsive-navbar-nav" />
+                <BootstrapNavbar.Collapse id="responsive-navbar-nav">
+                    <Nav className="ms-auto">
+                        {currentUser
+                            ? loggedInNavbarItems
+                            : loggedOutNavbarItems}
+                    </Nav>
+                </BootstrapNavbar.Collapse>
+            </Container>
+        </BootstrapNavbar>
     )
-
-    return <div>{navbarFrame}</div>
 }
