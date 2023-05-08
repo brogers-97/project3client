@@ -8,14 +8,14 @@ export default function Navbar({ currentUser, handleLogout }) {
     const loggedInNavbarItems = (
         <>
             <Dropdown as={Nav.Item}>
-                <Dropdown.Toggle as={Nav.Link}>
-                    Make a post
-                </Dropdown.Toggle>
+                <Dropdown.Toggle as={Nav.Link}>Make a post</Dropdown.Toggle>
                 <Dropdown.Menu variant="dark">
-                <NavDropdown.Item href="/search">About a game</NavDropdown.Item>
-                <NavDropdown.Item href="/new">
-                    About something else
-                </NavDropdown.Item>
+                    <NavDropdown.Item href="/search">
+                        About a game
+                    </NavDropdown.Item>
+                    <NavDropdown.Item href="/new">
+                        About something else
+                    </NavDropdown.Item>
                 </Dropdown.Menu>
             </Dropdown>
             <Nav.Link href="/search">Search</Nav.Link>

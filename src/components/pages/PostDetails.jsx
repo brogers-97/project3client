@@ -63,11 +63,6 @@ export default function PostDetails() {
     //     }
     // }
 
-
-
-
-    
-
     const loading = (
         <div>
             <h2>loading post...</h2>

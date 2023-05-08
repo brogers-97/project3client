@@ -1,4 +1,4 @@
-import Comments from "./Comments"
+import Comments from './Comments'
 
 export default function Post({ post, author }) {
     const border = { border: '1px solid black' }
@@ -9,17 +9,15 @@ export default function Post({ post, author }) {
                 <h2 className="fw-bolder mb-1">{post.postTitle}</h2>
                 {/* Slice operation below truncates the post document
                 createdAt property to show just YYYY/MM/DD */}
-                <p className="text-muted fst-italic mb-2">Posted on {post.createdAt.slice(0, -14)} by {author}</p>
+                <p className="text-muted fst-italic mb-2">
+                    Posted on {post.createdAt.slice(0, -14)} by {author}
+                </p>
                 <img src={post.imageUrl} alt="post.img" />
                 <p>{post.postBody}</p>
                 <p>Rating: {post.rating}</p>
             </article>
 
             <Comments />
-
-
-             
         </div>
-        
     )
 }

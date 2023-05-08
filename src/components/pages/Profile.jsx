@@ -7,9 +7,7 @@ import '../../profile.css'
 import Setting from '../partials/Settings'
 const token = localStorage.getItem('jwt')
 
-
 export default function Profile({ currentUser, handleLogout }) {
-
     console.log('profile mounted')
     const [msg, setMsg] = useState('')
     const [usersPosts, setUsersPosts] = useState([])
@@ -26,17 +24,16 @@ export default function Profile({ currentUser, handleLogout }) {
                         Authorization: token,
                     },
                 }
-                
+
                 const response = await axios.get(
                     `${process.env.REACT_APP_SERVER_URL}/users/auth-locked`,
                     options
                 )
-                
+
                 // added setting the userId state
                 const decoded = jwt_decode(token)
                 setUserId(decoded._id)
                 setMsg(response.data.msg)
-
             } catch (err) {
                 console.warn(err)
                 if (err.response) {
@@ -48,79 +45,55 @@ export default function Profile({ currentUser, handleLogout }) {
             }
         }
         fetchData()
-        
     }, [handleLogout, navigate])
 
-    
     useEffect(() => {
-        if(userId){
+        if (userId) {
             const url = `${process.env.REACT_APP_SERVER_URL}/users/posts?userId=${userId}`
             console.log(url)
-            axios.get(url)
-                .then(response => {
+            axios
+                .get(url)
+                .then((response) => {
                     setUsersPosts(response.data)
                 })
                 .catch(console.warn)
-                return () => {
-                    setUsersPosts([])
-                }
+            return () => {
+                setUsersPosts([])
+            }
         }
-    },[userId])
-    
+    }, [userId])
 
     const renderPost = usersPosts.map((post, i) => {
-        return (
-            <Post key={i} post={post}/>
-        )
+        return <Post key={i} post={post} />
     })
 
     const renderReviews = usersPosts.map((post, i) => {
-            return(
-                <li key={i}>{post.postBody}</li>
-            )
+        return <li key={i}>{post.postBody}</li>
     })
-    
-
 
     return (
-
-        <div className='profile-container'>
-
-            <div className='profile-left'>
-
+        <div className="profile-container">
+            <div className="profile-left">
                 <h1>Hello {currentUser?.name}</h1>
 
-                <div className='favorites'>
-                    <div className='favorite-game'>
-
-                    </div>
+                <div className="favorites">
+                    <div className="favorite-game"></div>
                 </div>
 
-                <div className='reviews'>
-                    <div className='recent-reviews'>
+                <div className="reviews">
+                    <div className="recent-reviews">
                         <h2>Recent Reviews</h2>
                     </div>
-                    <ul>
-                        {renderReviews}
-                    </ul>
+                    <ul>{renderReviews}</ul>
                 </div>
-
             </div>
-            
 
-
-            <div className='profile-post'>
-                <div className='post-container'>
-                    {renderPost}
-                </div>
+            <div className="profile-post">
+                <div className="post-container">{renderPost}</div>
             </div>
             <div>
-                <Setting 
-                    currentUser={currentUser}
-                />
+                <Setting currentUser={currentUser} />
             </div>
-
-
         </div>
     )
 }

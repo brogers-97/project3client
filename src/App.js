@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import './App.css'
-import './custom.css';
+import './custom.css'
 import Login from './components/pages/Login'
 import Profile from './components/pages/Profile'
 import Register from './components/pages/Register'
@@ -11,9 +11,7 @@ import jwt_decode from 'jwt-decode'
 import Home from './components/pages/Home'
 import New from './components/pages/New'
 import Search from './components/pages/Search'
-import Post from './components/partials/Post'
 import PostDetails from './components/pages/PostDetails'
-import PostForm from './components/partials/PostForm'
 
 function App() {
     // the currently logged in user will be stored up here in state
@@ -83,26 +81,21 @@ function App() {
                         }
                     />
 
+                    <Route path="/home" element={<Home />} />
+
+                    <Route path="/new" element={<New />} />
+
+                    <Route path="/posts/:id" element={<PostDetails />} />
+
                     <Route
-                        path="/home"
-                        element={<Home />}
+                        path="/search"
+                        element={
+                            <Search
+                                currentUser={currentUser}
+                                setCurrentUser={setCurrentUser}
+                            />
+                        }
                     />
-
-                    <Route
-                        path="/new"
-                        element={<New />}
-                    />
-
-					<Route 
-						path='/posts/:id'
-						element={<PostDetails />}
-					/>
-
-                    <Route
-                         path="/search" 
-                         element={<Search 
-                            currentUser={currentUser}
-                            setCurrentUser={setCurrentUser}/>} />
                 </Routes>
             </div>
         </Router>
