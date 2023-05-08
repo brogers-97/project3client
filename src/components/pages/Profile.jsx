@@ -6,12 +6,14 @@ import axios from 'axios'
 import '../../profile.css'
 import Setting from '../partials/Settings'
 const token = localStorage.getItem('jwt')
-let userId;
+
 
 export default function Profile({ currentUser, handleLogout }) {
 
+    console.log('profile mounted')
     const [msg, setMsg] = useState('')
     const [usersPosts, setUsersPosts] = useState([])
+    const [userId, setUserId] = useState(null)
     const navigate = useNavigate()
 
     // useEffect for getting the user data and checking auth
@@ -30,6 +32,9 @@ export default function Profile({ currentUser, handleLogout }) {
                     options
                 )
                 
+                // added setting the userId state
+                const decoded = jwt_decode(token)
+                setUserId(decoded._id)
                 setMsg(response.data.msg)
 
             } catch (err) {
@@ -43,39 +48,36 @@ export default function Profile({ currentUser, handleLogout }) {
             }
         }
         fetchData()
+        
     }, [handleLogout, navigate])
 
-
-    useEffect(() => {
-        const url = `${process.env.REACT_APP_SERVER_URL}/posts`
-        axios.get(url)
-            .then(response => {
-                setUsersPosts(response.data)
-            })
-            .catch(console.warn)
-    }, [])
-
-
-    useEffect(() => {
-        const decoded = jwt_decode(token)
-        console.log(decoded.name)
-        userId = decoded._id
-    },[])
     
+    useEffect(() => {
+        if(userId){
+            const url = `${process.env.REACT_APP_SERVER_URL}/users/posts?userId=${userId}`
+            console.log(url)
+            axios.get(url)
+                .then(response => {
+                    setUsersPosts(response.data)
+                })
+                .catch(console.warn)
+                return () => {
+                    setUsersPosts([])
+                }
+        }
+    },[userId])
     
+
     const renderPost = usersPosts.map((post, i) => {
-        if(post.poster === userId)
         return (
             <Post key={i} post={post}/>
         )
     })
 
     const renderReviews = usersPosts.map((post, i) => {
-        if(post.poster === userId && post.isReview == true){
             return(
-                <li>{post.postBody}</li>
+                <li key={i}>{post.postBody}</li>
             )
-        }
     })
     
 
