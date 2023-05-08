@@ -1,7 +1,14 @@
 import Comments from './Comments'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 export default function Post({ post, author }) {
     const border = { border: '1px solid black' }
+
+    const navigate = useNavigate()
+
+
+
 
     return (
         <div style={border}>
@@ -15,9 +22,18 @@ export default function Post({ post, author }) {
                 <img src={post.imageUrl} alt="post.img" />
                 <p>{post.postBody}</p>
                 <p>Rating: {post.rating}</p>
+                
+                
             </article>
 
-            <Comments />
+            
+            <article className="bg-primary text-light rounded-4">
+                {/* <p>{post.comments}</p> */}
+                
+
+            </article>
+
+
         </div>
     )
 }
