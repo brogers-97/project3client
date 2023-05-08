@@ -1,11 +1,11 @@
 import Comments from './Comments'
+import Container from "react-bootstrap/Container"
 
 export default function Post({ post, author }) {
-    const border = { border: '1px solid black' }
 
     return (
-        <div style={border}>
-            <article className="bg-primary text-light rounded-4">
+        <Container className="bg-primary text-light rounded-4 mb-4">
+            <article>
                 <h2 className="fw-bolder mb-1">{post.postTitle}</h2>
                 {/* Slice operation below truncates the post document
                 createdAt property to show just YYYY/MM/DD */}
@@ -18,6 +18,6 @@ export default function Post({ post, author }) {
             </article>
 
             <Comments />
-        </div>
+        </Container>
     )
 }

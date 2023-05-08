@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import Post from '../partials/Post'
+import Container from 'react-bootstrap/Container'
 
 export default function Home() {
     const [posts, setPosts] = useState([])
@@ -18,7 +19,7 @@ export default function Home() {
     }, [])
 
     return (
-        <div>
+        <Container>
             <h1>Home page</h1>
 
             {posts.map((post) => (
@@ -28,6 +29,6 @@ export default function Home() {
                     </a>
                 </div>
             ))}
-        </div>
+        </Container>
     )
 }

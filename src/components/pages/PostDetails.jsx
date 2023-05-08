@@ -2,8 +2,6 @@ import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 import Post from '../partials/Post'
 import PostForm from '../partials/PostForm'
 
@@ -71,15 +69,9 @@ export default function PostDetails() {
 
     const loaded = (
         <>
-            <Row>
-                <Col />
-                <Col md="auto">
-                    <Post post={post} author={'Andrew'} />
-                    {/* need to lock this button to the logged-in user if they are the author of the post */}
-                    <button onClick={() => setShowForm(true)}>Edit</button>
-                </Col>
-                <Col />
-            </Row>
+                <Post post={post} author={'Andrew'} />
+                {/* need to lock this button to the logged-in user if they are the author of the post */}
+                <button onClick={() => setShowForm(true)}>Edit</button>
         </>
     )
 
@@ -87,11 +79,11 @@ export default function PostDetails() {
 
     const formView = (
         <>
-            <PostForm
-                initialState={post}
-                handleSubmit={handleSubmit}
-                handleCancel={() => setShowForm(false)}
-            />
+                <PostForm
+                    initialState={post}
+                    handleSubmit={handleSubmit}
+                    handleCancel={() => setShowForm(false)}
+                />
         </>
     )
 
