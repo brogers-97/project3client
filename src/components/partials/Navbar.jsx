@@ -20,7 +20,7 @@ export default function Navbar({ currentUser, handleLogout }) {
             </Dropdown>
             <Nav.Link href="/search">Search</Nav.Link>
             <Nav.Link href="/profile">Profile</Nav.Link>
-            <Nav.Link href="/" onClick={handleLogout}>
+            <Nav.Link href="#" onClick={handleLogout}>
                 Log Out
             </Nav.Link>
         </>

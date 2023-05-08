@@ -1,16 +1,27 @@
 import React, { useState, useEffect } from 'react'
 import PostForm from '../partials/PostForm'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
-import Container from 'react-bootstrap/Container'
 
 export default function New() {
     const navigate = useNavigate()
+
+    // useEffect(() => {
+    //     const url = `${process.env.REACT_APP_SERVER_URL}`
+    //     axios.get(url)
+    //     .then(response => {
+    //         setPostData()
+
+    //     })
+    //     .catch(console.warn)
+    // })
 
     const handleSubmit = async (e, form) => {
         e.preventDefault()
         try {
             const token = localStorage.getItem('jwt')
+            // make the auth headers
             const options = {
                 headers: {
                     Authorization: token,
@@ -21,6 +32,7 @@ export default function New() {
                 form,
                 options
             )
+            // const userPosts = await axios.get(`${process.env.REACT_APP_SERVER_URL}/posts`)
             navigate(`/posts/${response.data}`)
         } catch (error) {
             console.log(error)
@@ -38,12 +50,7 @@ export default function New() {
     return (
         <div>
             <h1>New Post page</h1>
-            <Container>
-                <PostForm
-                    initialState={initialState}
-                    handleSubmit={handleSubmit}
-                />
-            </Container>
+            <PostForm initialState={initialState} handleSubmit={handleSubmit} />
         </div>
     )
 }

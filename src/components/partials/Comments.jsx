@@ -25,7 +25,7 @@ export default function Comments({ currentUser, id, comments }) {
                 options
             )
             setCommentsArray([...response.data.comments])
-            setFormData({ ...formData, content: '' })
+            setFormData({...formData, content:''})
         } catch (error) {
             console.log(error)
         }
