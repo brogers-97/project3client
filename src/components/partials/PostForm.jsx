@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { useState } from 'react'
+import Form from 'react-bootstrap/Form'
 
 export default function PostForm(props) {
     /*{
@@ -12,78 +13,124 @@ export default function PostForm(props) {
     }
     */
 
-    const [form, setForm] = useState(props.initialState)
+    const [formData, setFormData] = useState(props.initialState)
 
     return (
-        <div>
-            <form onSubmit={e =>props.handleSubmit(e, form)}>
-                <div>
-                    <label htmlFor="title">Post Title</label>
-                    <input 
+        <>
+            <Form onSubmit={(e) => props.handleSubmit(e, formData)}>
+                <Form.Group
+                    className="mb-3"
+                    controlId="exampleForm.ControlInput1"
+                >
+                    <Form.Label>Post Title:</Form.Label>
+                    <Form.Control
+                        size="lg"
                         type="text"
-                        placeholder="enter name"
+                        placeholder="post title"
                         id="postTitle"
-                        value={form.postTitle}
-                        onChange={e => setForm({...form, postTitle: e.target.value})}
+                        value={formData.postTitle}
+                        onChange={(e) =>
+                            setFormData({
+                                ...formData,
+                                postTitle: e.target.value,
+                            })
+                        }
                     />
-                </div>
-                <div>
-                    <label htmlFor="postBody">Post body</label>
-                    <input 
-                        type="text"
-                        placeholder="enter your review"
+                </Form.Group>
+                <Form.Group
+                    className="mb-3"
+                    controlId="exampleForm.ControlTextarea1"
+                >
+                    <Form.Label>Post:</Form.Label>
+                    <Form.Control
+                        as="textarea"
+                        rows={3}
                         id="postBody"
-                        value={form.postBody}
-                        onChange={e => setForm({...form, postBody: e.target.value})}
+                        value={formData.postBody}
+                        onChange={(e) =>
+                            setFormData({
+                                ...formData,
+                                postBody: e.target.value,
+                            })
+                        }
                     />
-                </div>
-                <div>
-                    <label htmlFor="taggedGame">Tagged Game</label>
-                    <input 
-                        type="number"
-                        placeholder="enter game"
-                        id="taggedGame"
-                        value={form.taggedGame}
-                        onChange={e => setForm({...form, taggedGame: e.target.value})}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="rating">Rating:</label>
-                    <input 
-                        type="number"
-                        placeholder="Rating"
-                        id="rating"
-                        value={form.rating}
-                        onChange={e => setForm({...form, rating: e.target.value})}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="isReview">Review:</label>
-                    <input 
-                        type="checkbox"
-                        id="isReview"
-                        value={form.isReview}
-                        onChange={e => setForm({...form, isReview: !form.isReview})}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="imageUrl">images:</label>
-                    <input 
+                </Form.Group>
+                <Form.Group
+                    /* think we should probably be hiding this -- user's never gonna
+                    need to put it in manually right? Just disabling it in the meantime*/
+                    className="mb-3"
+                    controlId="exampleForm.ControlInput1"
+                >
+                    <Form.Label>Tagged Game</Form.Label>
+                    <Form.Control
+                        disabled
+                        size="lg"
                         type="text"
-                        placeholder="enter image"
-                        id="imageUrl"
-                        value={form.imageUrl}
-                        onChange={e => setForm({...form, imageUrl: e.target.value})}
+                        placeholder="tagged game"
+                        id="postTitle"
+                        value={formData.taggedGame}
+                        onChange={(e) =>
+                            setFormData({
+                                ...formData,
+                                taggedGame: e.target.value,
+                            })
+                        }
                     />
-                </div>
-
+                </Form.Group>
+                <Form.Group
+                    className="mb-3"
+                    controlId="exampleForm.ControlInput1"
+                >
+                    <Form.Label>Rating</Form.Label>
+                    <Form.Control
+                        size="lg"
+                        type="text"
+                        placeholder="rating"
+                        id="rating"
+                        value={formData.rating}
+                        onChange={(e) =>
+                            setFormData({
+                                ...formData,
+                                rating: e.target.value,
+                            })
+                        }
+                    />
+                </Form.Group>
+                <Form.Check
+                    size="lg"
+                    type="checkbox"
+                    id="isReview"
+                    label="review"
+                    checked={formData.isReview}
+                    onChange={(e) =>
+                        setFormData({
+                            ...formData,
+                            isReview: !formData.isReview,
+                        })
+                    }
+                />
+                <Form.Group
+                    className="mb-3"
+                    controlId="exampleForm.ControlInput1"
+                >
+                    <Form.Label>Post Image:</Form.Label>
+                    <Form.Control
+                        size="lg"
+                        type="text"
+                        placeholder="image source"
+                        id="imageUrl"
+                        value={formData.imageUrl}
+                        onChange={(e) =>
+                            setFormData({
+                                ...formData,
+                                imageUrl: e.target.value,
+                            })
+                        }
+                    />
+                </Form.Group>
                 <button type="submit">Submit</button>
-
-
-
-            </form>
-
-            <button onClick={props.handleCancel}> Cancel </button>
-        </div>
+                <button onClick={props.handleCancel}> Cancel </button>
+            </Form>
+        </>
     )
 }

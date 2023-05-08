@@ -89,7 +89,6 @@ export default function PostDetails() {
 
     const formView = (
         <>
-            <p>this is where we edit the post</p>
             <PostForm
                 initialState={post}
                 handleSubmit={handleSubmit}
