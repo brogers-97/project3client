@@ -4,8 +4,9 @@ import axios from 'axios'
 import Container from 'react-bootstrap/Container'
 import Post from '../partials/Post'
 import PostForm from '../partials/PostForm'
+import Comments from '../partials/Comments'
 
-export default function PostDetails() {
+export default function PostDetails({ currentUser, setCurrentUser }) {
     const [post, setPost] = useState({})
     const [postLoaded, setPostLoaded] = useState(false)
     const [showForm, setShowForm] = useState(false)
@@ -69,9 +70,26 @@ export default function PostDetails() {
 
     const loaded = (
         <>
-                <Post post={post} author={'Andrew'} />
-                {/* need to lock this button to the logged-in user if they are the author of the post */}
-                <button onClick={() => setShowForm(true)}>Edit</button>
+            <Row>
+                <Col />
+                <Col md="auto">
+                    <Post
+                        post={post}
+                        author={'Andrew'}
+                        currentUser={currentUser}
+                        setCurrentUser={setCurrentUser}
+                        id={id}
+                    />
+                    {/* need to lock this button to the logged-in user if they are the author of the post */}
+                    <button onClick={() => setShowForm(true)}>Edit</button>
+                    <Comments
+                        currentUser={currentUser}
+                        id={id}
+                        comments={post.comments}
+                    />
+                </Col>
+                <Col />
+            </Row>
         </>
     )
 

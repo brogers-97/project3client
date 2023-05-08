@@ -2,6 +2,8 @@ import axios from 'axios'
 import { useState, useEffect } from 'react'
 import '../../App.css'
 import jwt_decode from 'jwt-decode'
+import Details from '../partials/Details'
+
 const token = localStorage.getItem('jwt')
 let userId
 
@@ -67,41 +69,41 @@ export default function Search(props) {
         userId = decoded._id
     }, [])
 
-    const handleFavoriteClick = async () => {
-        const gameId = gameDetails.id
-        let tempUser = currentUser
-        const gameIndex = tempUser.favoriteGames.indexOf(gameId)
-        if (gameIndex !== -1) {
-            tempUser.favoriteGames.splice(gameIndex, 1)
-        } else {
-            tempUser.favoriteGames.push(gameId)
-        }
-        setCurrentUser(tempUser)
-        console.log('gameId', gameId)
-        console.log(currentUser)
+    // const handleFavoriteClick = async () => {
+    //     const gameId = gameDetails.id
+    //     let tempUser = currentUser
+    //     const gameIndex = tempUser.favoriteGames.indexOf(gameId)
+    //     if (gameIndex !== -1) {
+    //         tempUser.favoriteGames.splice(gameIndex, 1)
+    //     } else {
+    //         tempUser.favoriteGames.push(gameId)
+    //     }
+    //     setCurrentUser(tempUser)
+    //     console.log('gameId', gameId)
+    //     console.log(currentUser)
 
-        if (currentUser.favoriteGames.includes(gameId)) {
-            setShowFave(true)
-        } else {
-            setShowFave(false)
-        }
+    //     if (currentUser.favoriteGames.includes(gameId)) {
+    //         setShowFave(true)
+    //     } else {
+    //         setShowFave(false)
+    //     }
 
-        try {
-            const options = {
-                headers: {
-                    Authorization: token,
-                },
-            }
-            const response = await axios.put(
-                `${process.env.REACT_APP_SERVER_URL}/users`,
-                currentUser,
-                options
-            )
-            console.log(response)
-        } catch (err) {
-            console.log(err)
-        }
-    }
+    //     try {
+    //         const options = {
+    //             headers: {
+    //                 Authorization: token,
+    //             },
+    //         }
+    //         const response = await axios.put(
+    //             `${process.env.REACT_APP_SERVER_URL}/users`,
+    //             currentUser,
+    //             options
+    //         )
+    //         console.log(response)
+    //     } catch (err) {
+    //         console.log(err)
+    //     }
+    // }
 
     return (
         <div>
@@ -116,30 +118,9 @@ export default function Search(props) {
                 <div className="left">{displayGames}</div>
 
                 <div className="right">
-                    {gameClicked && gameDetails ? (
-                        <div>
-                            <h2>{gameDetails.name}</h2>
-                            <img
-                                className="game-img"
-                                src={gameDetails.background_image}
-                                alt={`image of${gameDetails.name}`}
-                            />
-                            {/* <div dangerouslySetInnerHTML={{__html: gameDetails.description}}></div> */}
-                            {}
-                            {showFave ? (
-                                <button onClick={handleFavoriteClick}>
-                                    Un-Favorite
-                                </button>
-                            ) : (
-                                <button onClick={handleFavoriteClick}>
-                                    Favorite
-                                </button>
-                            )}
-                            {/* <button onClick={handleFavoriteClick}>Favorite</button> */}
-                        </div>
-                    ) : (
-                        <p>no details</p>
-                    )}
+                    <Details 
+                        gameDetails={gameDetails}
+                    />
                 </div>
             </div>
         </div>

@@ -85,7 +85,15 @@ function App() {
 
                     <Route path="/new" element={<New />} />
 
-                    <Route path="/posts/:id" element={<PostDetails />} />
+                    <Route
+                        path="/posts/:id"
+                        element={
+                            <PostDetails
+                                currentUser={currentUser}
+                                setCurrentUser={setCurrentUser}
+                            />
+                        }
+                    />
 
                     <Route
                         path="/search"
