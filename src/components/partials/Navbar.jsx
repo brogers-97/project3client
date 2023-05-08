@@ -1,105 +1,53 @@
-import { Link } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
-import '../../navbar.css'
+import Container from 'react-bootstrap/Container'
+import Dropdown from 'react-bootstrap/Dropdown'
+import Nav from 'react-bootstrap/Nav'
+import BootstrapNavbar from 'react-bootstrap/Navbar'
+import NavDropdown from 'react-bootstrap/NavDropdown'
 
 export default function Navbar({ currentUser, handleLogout }) {
+    const loggedInNavbarItems = (
+        <>
+            <Dropdown as={Nav.Item}>
+                <Dropdown.Toggle as={Nav.Link}>Make a post</Dropdown.Toggle>
+                <Dropdown.Menu variant="dark">
+                    <NavDropdown.Item href="/search">
+                        About a game
+                    </NavDropdown.Item>
+                    <NavDropdown.Item href="/new">
+                        About something else
+                    </NavDropdown.Item>
+                </Dropdown.Menu>
+            </Dropdown>
+            <Nav.Link href="/search">Search</Nav.Link>
+            <Nav.Link href="/profile">Profile</Nav.Link>
+            <Nav.Link href="#" onClick={handleLogout}>
+                Log Out
+            </Nav.Link>
+        </>
+    )
 
-	const navigate = useNavigate()
-	const [value, setValue] = useState('')
+    const loggedOutNavbarItems = (
+        <>
+            <Nav.Link href="/register">Register</Nav.Link>
+            <Nav.Link href="/login">Log in</Nav.Link>
+        </>
+    )
 
-	const handleChange = (e) => {
-		const location = e.target.value 
-		setValue(location)
-		navigate(location)
-	}
-
-	const loggedIn = (
-		<>
-			{/* if the user is logged in... */}
-			<nav className='nav-bar'>
-				<div className='nav-left'>
-					
-					<div className='btn'>
-						<Link to="/home">
-							<p>Home</p>
-						</Link>
-					</div>
-
-					<div className='btn'>
-						<Link to="/">
-							<p>Friends</p>
-						</Link>
-					</div>
-
-					<div className='btn'>
-
-						<select onChange={handleChange} value={value} name="create-post">
-
-							<option value={'/new'}>New Post</option>
-
-							<option value={'/search'}>New review</option>
-
-						</select>
-						
-					</div>
-
-				</div>
-
-				<div className='nav-right'>
-				<div className='btn'>
-						<Link to="/search">
-							<p>Search</p>
-						</Link>
-					</div>
-
-					<div className='btn'>
-						<Link to="/profile">
-							<p>profile</p>
-						</Link>
-					</div>
-
-					<div className='btn'>
-						<Link to="/">
-							<p onClick={handleLogout}>logout</p>
-						</Link>
-					</div>
-
-				</div>
-			</nav>
-		</>
-	)
-
-	const loggedOut = (
-		<>
-			{/* if the user is not logged in... */}
-			<nav className='nav-bar-logged-out'>
-				<div className='nav-right'>
-
-				<div className='btn'>
-					<Link to="/register">
-						<p>register</p>
-					</Link>
-				</div>
-
-				<div className='btn'>
-					<Link to="/login">
-						<p>login</p>
-					</Link>
-				</div> 
-
-				</div>
-			</nav>
-		</>
-	)
-
-	const border = { 'border-bottom': '2px solid black' }
-
-
-
-
-
-	return (
-		<div>{currentUser ? loggedIn : loggedOut}</div>
-	)
+    return (
+        <BootstrapNavbar bg="dark" variant="dark" expand="lg">
+            <Container>
+                <BootstrapNavbar.Brand href="/home">
+                    Joystick Junkies
+                </BootstrapNavbar.Brand>
+                <BootstrapNavbar.Toggle aria-controls="responsive-navbar-nav" />
+                <BootstrapNavbar.Collapse id="responsive-navbar-nav">
+                    <Nav className="ms-auto">
+                        {currentUser
+                            ? loggedInNavbarItems
+                            : loggedOutNavbarItems}
+                    </Nav>
+                </BootstrapNavbar.Collapse>
+            </Container>
+        </BootstrapNavbar>
+    )
 }

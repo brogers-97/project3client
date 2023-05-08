@@ -1,6 +1,4 @@
-
 export default function Comments(props) {
-
     // const [form, setForm] = useState(props.initialState)
 
     return (
