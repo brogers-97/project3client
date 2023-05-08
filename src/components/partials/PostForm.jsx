@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Container from 'react-bootstrap/Container'
 
 export default function PostForm(props) {
     /*{
@@ -81,7 +82,7 @@ export default function PostForm(props) {
     )
 
     return (
-        <>
+        <Container className="bg-primary text-light rounded-4">
             <Form onSubmit={(e) => props.handleSubmit(e, formData)}>
                 <Form.Group className="mb-3" controlId="postTitle">
                     <Form.Label>Post Title:</Form.Label>
@@ -131,6 +132,6 @@ export default function PostForm(props) {
                 <button type="submit">Submit</button>
                 <button onClick={props.handleCancel}> Cancel </button>
             </Form>
-        </>
+        </Container>
     )
 }
