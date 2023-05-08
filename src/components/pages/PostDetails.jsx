@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
 import Post from '../partials/Post'
 import PostForm from '../partials/PostForm'

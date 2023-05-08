@@ -23,8 +23,6 @@ export default function Post({ post, author }) {
             <article className="bg-primary text-light rounded-4">
                 {/* <p>{post.comments}</p> */}
             </article>
-
-            <Comments />
         </Container>
     )
 }
