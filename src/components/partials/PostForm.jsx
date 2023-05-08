@@ -22,7 +22,7 @@ export default function PostForm(props) {
                     /* think we should probably be hiding this -- user's never gonna
                     need to put it in manually right? Just disabling it in the meantime*/
                     className="mb-3"
-                    controlId="exampleForm.ControlInput1"
+                    controlId="taggedGame"
                 >
                     <Form.Label>Tagged Game</Form.Label>
                     <Form.Control
@@ -30,7 +30,7 @@ export default function PostForm(props) {
                         size="lg"
                         type="text"
                         placeholder="tagged game"
-                        id="postTitle"
+
                         value={formData.taggedGame}
                         onChange={(e) =>
                             setFormData({
@@ -42,14 +42,13 @@ export default function PostForm(props) {
                 </Form.Group>
                 <Form.Group
                     className="mb-3"
-                    controlId="exampleForm.ControlInput1"
+                    controlId="rating"
                 >
                     <Form.Label>Rating</Form.Label>
                     <Form.Control
                         size="lg"
                         type="text"
                         placeholder="rating"
-                        id="rating"
                         value={formData.rating}
                         onChange={(e) =>
                             setFormData({
@@ -80,14 +79,13 @@ export default function PostForm(props) {
             <Form onSubmit={(e) => props.handleSubmit(e, formData)}>
                 <Form.Group
                     className="mb-3"
-                    controlId="exampleForm.ControlInput1"
+                    controlId="postTitle"
                 >
                     <Form.Label>Post Title:</Form.Label>
                     <Form.Control
                         size="lg"
                         type="text"
                         placeholder="post title"
-                        id="postTitle"
                         value={formData.postTitle}
                         onChange={(e) =>
                             setFormData({
@@ -99,13 +97,12 @@ export default function PostForm(props) {
                 </Form.Group>
                 <Form.Group
                     className="mb-3"
-                    controlId="exampleForm.ControlTextarea1"
+                    controlId="postBody"
                 >
                     <Form.Label>Post:</Form.Label>
                     <Form.Control
                         as="textarea"
                         rows={3}
-                        id="postBody"
                         value={formData.postBody}
                         onChange={(e) =>
                             setFormData({
@@ -117,14 +114,13 @@ export default function PostForm(props) {
                 </Form.Group>
                 <Form.Group
                     className="mb-3"
-                    controlId="exampleForm.ControlInput1"
+                    controlId="imageUrl"
                 >
                     <Form.Label>Post Image:</Form.Label>
                     <Form.Control
                         size="lg"
                         type="text"
                         placeholder="image source"
-                        id="imageUrl"
                         value={formData.imageUrl}
                         onChange={(e) =>
                             setFormData({
