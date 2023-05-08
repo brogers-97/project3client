@@ -1,22 +1,61 @@
-export default function Comments(props) {
-    // const [form, setForm] = useState(props.initialState)
+import { useState } from 'react'
+import Form from 'react-bootstrap/Form'
+import axios from 'axios'
+
+export default function Comments({ currentUser, id, comments }) {
+    const [formData, setFormData] = useState({
+        content: '',
+        postedBy: currentUser.name,
+    })
+    const [commentsArray, setCommentsArray] = useState(comments)
+
+    const handleSubmit = async (e, form) => {
+        e.preventDefault()
+        try {
+            const token = localStorage.getItem('jwt')
+            // make the auth headers
+            const options = {
+                headers: {
+                    Authorization: token,
+                },
+            }
+            const response = await axios.post(
+                `${process.env.REACT_APP_SERVER_URL}/posts/${id}/comments`,
+                form,
+                options
+            )
+            setCommentsArray([...response.data.comments])
+            setFormData({...formData, content:''})
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return (
         <>
-            <div>
-                <label htmlFor="comment">Comments:</label>
-                <input
-                    type="text"
+            <Form onSubmit={(e) => handleSubmit(e, formData)}>
+                <Form.Label htmlFor="content">Comments:</Form.Label>
+                <Form.Control
+                    as="textarea"
                     placeholder="enter comment"
-                    id="comment"
-                    // value={form.comment}
-                    // onChange={(e) =>
-                    //     setForm({ ...form, comment: e.target.value })
-                    // }
+                    id="content"
+                    value={formData.content}
+                    onChange={(e) =>
+                        setFormData({
+                            ...formData,
+                            content: e.target.value,
+                        })
+                    }
                 />
-            </div>
 
-            <button type="submit">Submit</button>
+                <button type="submit">Submit</button>
+            </Form>
+            {commentsArray.map((comment) => (
+                <div key={comment.id}>
+                    <p>{comment.content}</p>
+                    <p>Posted by: {comment.postedBy}</p>
+                </div>
+            ))}
         </>
     )
 }
