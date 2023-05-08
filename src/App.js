@@ -1,11 +1,12 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import './App.css'
+import './custom.css';
 import Login from './components/pages/Login'
 import Profile from './components/pages/Profile'
 import Register from './components/pages/Register'
 import Welcome from './components/pages/Welcome'
 import Navbar from './components/partials/Navbar'
-import './App.css'
 import jwt_decode from 'jwt-decode'
 import Home from './components/pages/Home'
 import New from './components/pages/New'
@@ -13,7 +14,6 @@ import Search from './components/pages/Search'
 import Post from './components/partials/Post'
 import PostDetails from './components/pages/PostDetails'
 import PostForm from './components/partials/PostForm'
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
     // the currently logged in user will be stored up here in state

@@ -71,17 +71,15 @@ export default function PostDetails() {
 
     const loaded = (
         <>
-            <Container>
-                <Row>
-                    <Col />
-                    <Col md="auto">
-                        <Post post={post} author={'Andrew'} />
-                        {/* need to lock this button to the logged-in user if they are the author of the post */}
-                        <button onClick={() => setShowForm(true)}>Edit</button>
-                    </Col>
-                    <Col />
-                </Row>
-            </Container>
+            <Row>
+                <Col />
+                <Col md="auto">
+                    <Post post={post} author={'Andrew'} />
+                    {/* need to lock this button to the logged-in user if they are the author of the post */}
+                    <button onClick={() => setShowForm(true)}>Edit</button>
+                </Col>
+                <Col />
+            </Row>
         </>
     )
 
@@ -98,12 +96,12 @@ export default function PostDetails() {
     )
 
     return (
-    /* if the user is NOT editing the post, showForm is false:
+        /* if the user is NOT editing the post, showForm is false:
     return a view that includes the Post component for the post whose ID was passed as a param
     
     if the user IS editing the post, showForm is true: return a view that includes the PostForm
     component and sending it as props the post whose ID was passed as a param */
-        <Container className="bg-warning">
+        <Container className="bg-secondary">
             {showForm ? formView : postView}
         </Container>
     )
