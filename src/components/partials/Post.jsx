@@ -1,3 +1,5 @@
+import Comments from "./Comments"
+
 export default function Post({ post }) {
     const border = { border: '1px solid black' }
 
@@ -8,6 +10,12 @@ export default function Post({ post }) {
             <p>Title: {post.postTitle}</p>
             <p>Body: {post.postBody}</p>
             <p>Rating: {post.rating}</p>
+
+            <Comments />
+
+
+             
         </div>
+        
     )
 }
