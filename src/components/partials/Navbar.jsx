@@ -1,4 +1,5 @@
 import Container from 'react-bootstrap/Container'
+import Dropdown from 'react-bootstrap/Dropdown'
 import Nav from 'react-bootstrap/Nav'
 import BootstrapNavbar from 'react-bootstrap/Navbar'
 import NavDropdown from 'react-bootstrap/NavDropdown'
@@ -6,12 +7,17 @@ import NavDropdown from 'react-bootstrap/NavDropdown'
 export default function Navbar({ currentUser, handleLogout }) {
     const loggedInNavbarItems = (
         <>
-            <NavDropdown title="Make a post" id="basic-nav-dropdown">
+            <Dropdown as={Nav.Item}>
+                <Dropdown.Toggle as={Nav.Link}>
+                    Make a post
+                </Dropdown.Toggle>
+                <Dropdown.Menu variant="dark">
                 <NavDropdown.Item href="/search">About a game</NavDropdown.Item>
                 <NavDropdown.Item href="/new">
                     About something else
                 </NavDropdown.Item>
-            </NavDropdown>
+                </Dropdown.Menu>
+            </Dropdown>
             <Nav.Link href="/search">Search</Nav.Link>
             <Nav.Link href="/profile">Profile</Nav.Link>
             <Nav.Link href="#" onClick={handleLogout}>
