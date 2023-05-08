@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 import Post from '../partials/Post'
 import PostForm from '../partials/PostForm'
 
@@ -68,17 +71,21 @@ export default function PostDetails() {
 
     const loaded = (
         <>
-            <Post post={post} author={"Andrew"} />
+            <Container>
+                <Row>
+                    <Col />
+                    <Col md="auto">
+                        <Post post={post} author={'Andrew'} />
+                        {/* need to lock this button to the logged-in user if they are the author of the post */}
+                        <button onClick={() => setShowForm(true)}>Edit</button>
+                    </Col>
+                    <Col />
+                </Row>
+            </Container>
         </>
     )
 
-    const postView = (
-        <>
-            {postLoaded ? loaded : loading}
-            {/* need to lock this button to the logged-in user if they are the author of the post */}
-            <button onClick={() => setShowForm(true)}>Edit</button>
-        </>
-    )
+    const postView = <>{postLoaded ? loaded : loading}</>
 
     const formView = (
         <>
@@ -91,10 +98,14 @@ export default function PostDetails() {
         </>
     )
 
+    return (
     /* if the user is NOT editing the post, showForm is false:
     return a view that includes the Post component for the post whose ID was passed as a param
     
     if the user IS editing the post, showForm is true: return a view that includes the PostForm
     component and sending it as props the post whose ID was passed as a param */
-    return showForm ? formView : postView
+        <Container className="bg-warning">
+            {showForm ? formView : postView}
+        </Container>
+    )
 }

@@ -48,7 +48,7 @@ function App() {
                 <Navbar currentUser={currentUser} handleLogout={handleLogout} />
             </header>
 
-            <div className="App">
+            <div className="App bg-success">
                 <Routes>
                     <Route path="/" element={<Welcome />} />
 
