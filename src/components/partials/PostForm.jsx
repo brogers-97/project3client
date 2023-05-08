@@ -14,48 +14,11 @@ export default function PostForm(props) {
     */
 
     const [formData, setFormData] = useState(props.initialState)
+    const [ postIsAboutGame, setPostIsAboutGame ] = useState(true)
 
-    return (
+    const gameOnlyFields = (
         <>
-            <Form onSubmit={(e) => props.handleSubmit(e, formData)}>
-                <Form.Group
-                    className="mb-3"
-                    controlId="exampleForm.ControlInput1"
-                >
-                    <Form.Label>Post Title:</Form.Label>
-                    <Form.Control
-                        size="lg"
-                        type="text"
-                        placeholder="post title"
-                        id="postTitle"
-                        value={formData.postTitle}
-                        onChange={(e) =>
-                            setFormData({
-                                ...formData,
-                                postTitle: e.target.value,
-                            })
-                        }
-                    />
-                </Form.Group>
-                <Form.Group
-                    className="mb-3"
-                    controlId="exampleForm.ControlTextarea1"
-                >
-                    <Form.Label>Post:</Form.Label>
-                    <Form.Control
-                        as="textarea"
-                        rows={3}
-                        id="postBody"
-                        value={formData.postBody}
-                        onChange={(e) =>
-                            setFormData({
-                                ...formData,
-                                postBody: e.target.value,
-                            })
-                        }
-                    />
-                </Form.Group>
-                <Form.Group
+                        <Form.Group
                     /* think we should probably be hiding this -- user's never gonna
                     need to put it in manually right? Just disabling it in the meantime*/
                     className="mb-3"
@@ -109,6 +72,49 @@ export default function PostForm(props) {
                         })
                     }
                 />
+        </>
+    )
+
+    return (
+        <>
+            <Form onSubmit={(e) => props.handleSubmit(e, formData)}>
+                <Form.Group
+                    className="mb-3"
+                    controlId="exampleForm.ControlInput1"
+                >
+                    <Form.Label>Post Title:</Form.Label>
+                    <Form.Control
+                        size="lg"
+                        type="text"
+                        placeholder="post title"
+                        id="postTitle"
+                        value={formData.postTitle}
+                        onChange={(e) =>
+                            setFormData({
+                                ...formData,
+                                postTitle: e.target.value,
+                            })
+                        }
+                    />
+                </Form.Group>
+                <Form.Group
+                    className="mb-3"
+                    controlId="exampleForm.ControlTextarea1"
+                >
+                    <Form.Label>Post:</Form.Label>
+                    <Form.Control
+                        as="textarea"
+                        rows={3}
+                        id="postBody"
+                        value={formData.postBody}
+                        onChange={(e) =>
+                            setFormData({
+                                ...formData,
+                                postBody: e.target.value,
+                            })
+                        }
+                    />
+                </Form.Group>
                 <Form.Group
                     className="mb-3"
                     controlId="exampleForm.ControlInput1"
@@ -128,6 +134,7 @@ export default function PostForm(props) {
                         }
                     />
                 </Form.Group>
+                {postIsAboutGame ? gameOnlyFields : null}
                 <button type="submit">Submit</button>
                 <button onClick={props.handleCancel}> Cancel </button>
             </Form>
