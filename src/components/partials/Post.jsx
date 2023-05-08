@@ -1,10 +1,9 @@
 import Comments from './Comments'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import Container from "react-bootstrap/Container"
+import Container from 'react-bootstrap/Container'
 
 export default function Post({ post, author }) {
-
     const navigate = useNavigate()
 
     return (
@@ -19,15 +18,10 @@ export default function Post({ post, author }) {
                 <img class="img-fluid" src={post.imageUrl} alt="post.img" />
                 <p>{post.postBody}</p>
                 <p>Rating: {post.rating}</p>
-                
-                
             </article>
 
-            
             <article className="bg-primary text-light rounded-4">
                 {/* <p>{post.comments}</p> */}
-                
-
             </article>
 
             <Comments />

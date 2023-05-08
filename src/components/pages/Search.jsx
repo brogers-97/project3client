@@ -118,9 +118,7 @@ export default function Search(props) {
                 <div className="left">{displayGames}</div>
 
                 <div className="right">
-                    <Details 
-                        gameDetails={gameDetails}
-                    />
+                    <Details gameDetails={gameDetails} />
                 </div>
             </div>
         </div>

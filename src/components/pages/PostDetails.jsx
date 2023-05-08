@@ -97,11 +97,11 @@ export default function PostDetails({ currentUser, setCurrentUser }) {
 
     const formView = (
         <>
-                <PostForm
-                    initialState={post}
-                    handleSubmit={handleSubmit}
-                    handleCancel={() => setShowForm(false)}
-                />
+            <PostForm
+                initialState={post}
+                handleSubmit={handleSubmit}
+                handleCancel={() => setShowForm(false)}
+            />
         </>
     )
 
