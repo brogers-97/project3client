@@ -12,7 +12,7 @@ export default function Post({ post, author }) {
                 <p className="text-muted fst-italic mb-2">
                     Posted on {post.createdAt.slice(0, -14)} by {author}
                 </p>
-                <img src={post.imageUrl} alt="post.img" />
+                <img class="img-fluid" src={post.imageUrl} alt="post.img" />
                 <p>{post.postBody}</p>
                 <p>Rating: {post.rating}</p>
             </article>
