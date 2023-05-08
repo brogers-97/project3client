@@ -1,3 +1,5 @@
+import Comments from "./Comments"
+
 export default function Post({ post, author }) {
     const border = { border: '1px solid black' }
 
@@ -12,6 +14,12 @@ export default function Post({ post, author }) {
                 <p>{post.postBody}</p>
                 <p>Rating: {post.rating}</p>
             </article>
+
+            <Comments />
+
+
+             
         </div>
+        
     )
 }
