@@ -25,6 +25,23 @@ export default function Details(props) {
     },[])
     const navigate = useNavigate()
 
+    // useEffect(() => {
+    //     const getGameTrailer = async () => {
+    //         await axios.get(`https://api.rawg.io/api/games/${props.gameDetails.id}/movies?key=${process.env.REACT_APP_API_KEY}`)
+    //         .then((response) => {
+    //             console.log(response)
+    //         })
+    //         .catch(console.warn)
+    //     }
+    //     getGameTrailer()
+    // },[])
+
+    // const showGenres = props.gameDetails.genres.map((genre, i) => {
+    //     return (
+    //         genre.name 
+    //     )
+    // })
+
     const handleFavoriteClick = async () => {
         const url = `${process.env.REACT_APP_SERVER_URL}/users`
         console.log('first', currentUser)
@@ -115,6 +132,9 @@ export default function Details(props) {
                         review this game
                     </button>
                     </div>
+                    {/* <p>{props.gameDetails.description_raw ? (props.gameDetails.description_raw) : 'No Description'}</p> */}
+                    <p>Metacritic Score: {props.gameDetails.metacritic}</p>
+                    {/* <p>Rating: {props.gameDetails.esrb_rating}</p> */}
                 </div>
             )}
         </div>
