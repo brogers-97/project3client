@@ -7,9 +7,22 @@ import { useNavigate } from 'react-router-dom'
 const token = localStorage.getItem('jwt')
 
 export default function Details(props) {
-    console.log(jwt_decode(localStorage.jwt))
-    const [currentUser, setCurrentUser] = useState(jwt_decode(localStorage.jwt))
-    console.log('current user from state', currentUser.favoriteGames)
+    const email = jwt_decode(localStorage.jwt).email
+    const [currentUser, setCurrentUser] = useState()
+    // console.log('current user from state', currentUser.favoriteGames)
+
+    useEffect(() => {
+        const getUserData = async () => {
+            try{
+                const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/users?userEmail=${email}`)
+                setCurrentUser(response.data)
+                console.log(response)
+            }catch(err){
+                console.log(err)
+            }
+        }
+        getUserData()
+    },[])
     const navigate = useNavigate()
 
     const handleFavoriteClick = async () => {
@@ -31,14 +44,14 @@ export default function Details(props) {
                 props.gameDetails.id,
             ]
         }
-        setCurrentUser({
+        let updatedUser = {
             ...currentUser,
-            favoriteGames: updatedFavoriteGames,
-        })
+            favoriteGames: updatedFavoriteGames
+        }
+        setCurrentUser(updatedUser)
 
         console.log('upated user', currentUser.favoriteGames)
 
-        // console.log('click',props.gameDetails.id)
 
         try {
             const options = {
@@ -46,7 +59,8 @@ export default function Details(props) {
                     Authorization: token,
                 },
             }
-            const response = await axios.put(url, currentUser, options)
+            const response = await axios.put(url, updatedUser, options)
+            console.log(response)
         } catch (err) {
             console.log(err)
         }
