@@ -13,6 +13,8 @@ export default function Profile({ currentUser, handleLogout }) {
     const [usersPosts, setUsersPosts] = useState([])
     const [userId, setUserId] = useState(null)
     const navigate = useNavigate()
+    const [favorites, setFavorites] = useState([])
+
 
     // useEffect for getting the user data and checking auth
     useEffect(() => {
@@ -62,6 +64,18 @@ export default function Profile({ currentUser, handleLogout }) {
             }
         }
     }, [userId])
+
+    useEffect(() => {
+        axios
+            .get(`${process.env.REACT_APP_SERVER_URL}/profile`)
+            .then((response) => {
+                const userData = response.data
+                setFavorites(userData)
+            })
+            .catch((error) => {
+                console.error(error)
+            })
+    }, [])
 
     const renderPost = usersPosts.map((post, i) => {
         return <Post key={i} post={post} />
