@@ -22,8 +22,8 @@ export default function Home() {
         <Container>
             <h1>Home page</h1>
 
-            {posts.map((post) => (
-                <div key={post.id}>
+            {posts.map((post, i) => (
+                <div key={`post at ${i}`}>
                     <a href={`/posts/${post._id}`}>
                         <Post post={post} />
                     </a>

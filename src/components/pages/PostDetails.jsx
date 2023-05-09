@@ -73,19 +73,6 @@ export default function PostDetails({ currentUser, setCurrentUser }) {
         }
     }
 
-    // const handleDeleteClick = async () => {
-    //     try {
-    //         await axios.delete(
-    //             `${process.env.REACT_APP_SERVER_URL}/posts/${id}`
-    //         )
-
-    //         //navigates home page
-    //         navigate('/')
-    //     } catch (err) {
-    //         console.log(err)
-    //     }
-    // }
-
     const loading = (
         <div>
             <h2>loading post...</h2>

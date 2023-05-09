@@ -1,10 +1,6 @@
-import Comments from './Comments'
-import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
 import Container from 'react-bootstrap/Container'
 
 export default function Post({ post, author }) {
-    const navigate = useNavigate()
 
     return (
         <Container className="bg-primary text-light rounded-4 mb-4">
@@ -21,7 +17,6 @@ export default function Post({ post, author }) {
             </article>
 
             <article className="bg-primary text-light rounded-4">
-                {/* <p>{post.comments}</p> */}
             </article>
         </Container>
     )

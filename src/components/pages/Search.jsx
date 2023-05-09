@@ -11,13 +11,6 @@ export default function Search(props) {
     const [game, setGame] = useState()
     const [gameData, setGameData] = useState([])
     const [gameDetails, setGameDetails] = useState()
-    const [gameClicked, setGameClicked] = useState(false)
-    const [currentUser, setCurrentUser] = useState()
-    const [showFave, setShowFave] = useState()
-
-    useEffect(() => {
-        setCurrentUser(props.currentUser)
-    }, [props.currentUser])
 
     useEffect(() => {
         if (game) {
@@ -31,7 +24,10 @@ export default function Search(props) {
         }
     }, [game])
 
-    useEffect(() => {})
+    useEffect(() => {
+        const decoded = jwt_decode(token)
+        userId = decoded._id
+    }, [])
 
     const displayGames = gameData.map((game, i) => {
         return (
@@ -54,7 +50,6 @@ export default function Search(props) {
                 setGameDetails(response.data)
             })
             .catch(console.warn)
-        setGameClicked(true)
     }
 
     const handleSearchClick = (e) => {
@@ -63,47 +58,6 @@ export default function Search(props) {
         const searched = searchInput.value
         setGame(searched)
     }
-
-    useEffect(() => {
-        const decoded = jwt_decode(token)
-        userId = decoded._id
-    }, [])
-
-    // const handleFavoriteClick = async () => {
-    //     const gameId = gameDetails.id
-    //     let tempUser = currentUser
-    //     const gameIndex = tempUser.favoriteGames.indexOf(gameId)
-    //     if (gameIndex !== -1) {
-    //         tempUser.favoriteGames.splice(gameIndex, 1)
-    //     } else {
-    //         tempUser.favoriteGames.push(gameId)
-    //     }
-    //     setCurrentUser(tempUser)
-    //     console.log('gameId', gameId)
-    //     console.log(currentUser)
-
-    //     if (currentUser.favoriteGames.includes(gameId)) {
-    //         setShowFave(true)
-    //     } else {
-    //         setShowFave(false)
-    //     }
-
-    //     try {
-    //         const options = {
-    //             headers: {
-    //                 Authorization: token,
-    //             },
-    //         }
-    //         const response = await axios.put(
-    //             `${process.env.REACT_APP_SERVER_URL}/users`,
-    //             currentUser,
-    //             options
-    //         )
-    //         console.log(response)
-    //     } catch (err) {
-    //         console.log(err)
-    //     }
-    // }
 
     return (
         <div className="text-light">
