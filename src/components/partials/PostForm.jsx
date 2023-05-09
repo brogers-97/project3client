@@ -129,8 +129,8 @@ export default function PostForm(props) {
                     />
                 </Form.Group>
                 {postIsAboutGame ? gameOnlyFields : null}
-                <button type="submit">Submit</button>
-                <button onClick={props.handleCancel}> Cancel </button>
+                <button className="btn btn-primary" type="submit">Submit</button>
+                <button className="btn btn-primary" onClick={props.handleCancel}> Cancel </button>
             </Form>
         </Container>
     )
