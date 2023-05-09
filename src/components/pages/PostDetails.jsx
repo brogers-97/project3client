@@ -85,10 +85,13 @@ export default function PostDetails({ currentUser, setCurrentUser }) {
                         setCurrentUser={setCurrentUser}
                         id={id}
                     />
-                    {/* need to lock this button to the logged-in user if they are the author of the post */}
-                    {true ? 
+                    {/* first layer of ternary checks whether there's a user loaded in state.  once the current user is loaded in state, second layer of ternary checks whether the logged in user's name matches that of the author.  if so, client shows edit button. 
+                    
+                    with more time, ideally we'd do server side checking to confirm that the logged in user matches the user who wrote the post, as this implementation is susceptible to a user changing state in dev tools to cause the edit button to appear on someone else's post */}
+                    {currentUser ? 
+                    (currentUser.name === author ?
                     <button onClick={() => setShowForm(true)}>Edit</button>
-                    : null}
+                    : null) : null}
                     <Comments
                         currentUser={currentUser}
                         id={id}
