@@ -77,7 +77,8 @@ export default function Details(props) {
                             navigate('/new', {
                                 state: {
                                     origin: 'search',
-                                    gameDetails: props.gameDetails.id,
+                                    gameName: props.gameDetails.name,
+                                    gameId: props.gameDetails.id,
                                     isReview: false,
                                 },
                             })
@@ -90,6 +91,7 @@ export default function Details(props) {
                             navigate('/new', {
                                 state: {
                                     origin: 'search',
+                                    gameName: props.gameDetails.name,
                                     gameId: props.gameDetails.id,
                                     isReview: true,
                                 },
