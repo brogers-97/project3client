@@ -5,11 +5,9 @@ import Post from '../partials/Post'
 import axios from 'axios'
 import '../../profile.css'
 import Setting from '../partials/Settings'
-const token = localStorage.getItem('jwt')
 
 export default function Profile({ currentUser, handleLogout }) {
     console.log('profile mounted')
-    const [msg, setMsg] = useState('')
     const [usersPosts, setUsersPosts] = useState([])
     const [userId, setUserId] = useState(null)
     const navigate = useNavigate()
@@ -26,7 +24,7 @@ export default function Profile({ currentUser, handleLogout }) {
                     },
                 }
 
-                const response = await axios.get(
+                await axios.get(
                     `${process.env.REACT_APP_SERVER_URL}/users/auth-locked`,
                     options
                 )
@@ -34,7 +32,6 @@ export default function Profile({ currentUser, handleLogout }) {
                 // added setting the userId state
                 const decoded = jwt_decode(token)
                 setUserId(decoded._id)
-                setMsg(response.data.msg)
             } catch (err) {
                 console.warn(err)
                 if (err.response) {
@@ -66,9 +63,11 @@ export default function Profile({ currentUser, handleLogout }) {
 
     useEffect(() => {
         // Fetch the favoriteGames data from the server when the component mounts
-        if(userId) {
+        if (userId) {
             axios
-                .get(`${process.env.REACT_APP_SERVER_URL}/users/favorites?userId=${userId}`)
+                .get(
+                    `${process.env.REACT_APP_SERVER_URL}/users/favorites?userId=${userId}`
+                )
                 .then((response) => {
                     // Update the component state with the favoriteGames data
                     // console.log(response.data.favoriteGames)
@@ -77,10 +76,8 @@ export default function Profile({ currentUser, handleLogout }) {
                 .catch((error) => {
                     console.log(error)
                 })
-            }
+        }
     }, [userId])
-
-    
 
     const renderPost = usersPosts.map((post, i) => {
         return <Post key={i} post={post} />

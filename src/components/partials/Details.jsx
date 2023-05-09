@@ -13,16 +13,17 @@ export default function Details(props) {
 
     useEffect(() => {
         const getUserData = async () => {
-            try{
-                const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/users?userEmail=${email}`)
+            try {
+                const response = await axios.get(
+                    `${process.env.REACT_APP_SERVER_URL}/users?userEmail=${email}`
+                )
                 setCurrentUser(response.data)
-                console.log(response)
-            }catch(err){
+            } catch (err) {
                 console.log(err)
             }
         }
         getUserData()
-    },[])
+    }, [])
     const navigate = useNavigate()
 
     // useEffect(() => {
@@ -38,13 +39,12 @@ export default function Details(props) {
 
     // const showGenres = props.gameDetails.genres.map((genre, i) => {
     //     return (
-    //         genre.name 
+    //         genre.name
     //     )
     // })
 
     const handleFavoriteClick = async () => {
         const url = `${process.env.REACT_APP_SERVER_URL}/users`
-        console.log('first', currentUser)
         const gameIndex = currentUser.favoriteGames.indexOf(
             props.gameDetails.id
         )
@@ -63,12 +63,9 @@ export default function Details(props) {
         }
         let updatedUser = {
             ...currentUser,
-            favoriteGames: updatedFavoriteGames
+            favoriteGames: updatedFavoriteGames,
         }
         setCurrentUser(updatedUser)
-
-        console.log('upated user', currentUser.favoriteGames)
-
 
         try {
             const options = {
@@ -77,7 +74,6 @@ export default function Details(props) {
                 },
             }
             const response = await axios.put(url, updatedUser, options)
-            console.log(response)
         } catch (err) {
             console.log(err)
         }
@@ -96,41 +92,46 @@ export default function Details(props) {
                         alt=""
                     />
                     <div className="d-flex p-2 justify-content-around">
-                    <button className="btn btn-primary" onClick={handleFavoriteClick}>
-                        {currentUser.favoriteGames.includes(
-                            props.gameDetails.id
-                        )
-                            ? 'Un-favorite'
-                            : 'favorite'}
-                    </button>
-                    <button className="btn btn-primary"
-                        onClick={() => {
-                            navigate('/new', {
-                                state: {
-                                    origin: 'search',
-                                    gameName: props.gameDetails.name,
-                                    gameId: props.gameDetails.id,
-                                    isReview: false,
-                                },
-                            })
-                        }}
-                    >
-                        post about this game
-                    </button>
-                    <button className="btn btn-primary"
-                        onClick={() => {
-                            navigate('/new', {
-                                state: {
-                                    origin: 'search',
-                                    gameName: props.gameDetails.name,
-                                    gameId: props.gameDetails.id,
-                                    isReview: true,
-                                },
-                            })
-                        }}
-                    >
-                        review this game
-                    </button>
+                        <button
+                            className="btn btn-primary"
+                            onClick={handleFavoriteClick}
+                        >
+                            {currentUser.favoriteGames.includes(
+                                props.gameDetails.id
+                            )
+                                ? 'Un-favorite'
+                                : 'favorite'}
+                        </button>
+                        <button
+                            className="btn btn-primary"
+                            onClick={() => {
+                                navigate('/new', {
+                                    state: {
+                                        origin: 'search',
+                                        gameName: props.gameDetails.name,
+                                        gameId: props.gameDetails.id,
+                                        isReview: false,
+                                    },
+                                })
+                            }}
+                        >
+                            post about this game
+                        </button>
+                        <button
+                            className="btn btn-primary"
+                            onClick={() => {
+                                navigate('/new', {
+                                    state: {
+                                        origin: 'search',
+                                        gameName: props.gameDetails.name,
+                                        gameId: props.gameDetails.id,
+                                        isReview: true,
+                                    },
+                                })
+                            }}
+                        >
+                            review this game
+                        </button>
                     </div>
                     {/* <p>{props.gameDetails.description_raw ? (props.gameDetails.description_raw) : 'No Description'}</p> */}
                     <p>Metacritic Score: {props.gameDetails.metacritic}</p>

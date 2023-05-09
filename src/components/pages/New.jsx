@@ -7,7 +7,7 @@ import { useLocation } from 'react-router-dom'
 
 export default function New() {
     const [originIsSearch, setOriginIsSearch] = useState(false)
-    const [gameName, setGameName] = useState("")
+    const [gameName, setGameName] = useState('')
     const [gameId, setGameId] = useState(undefined)
     const [isReview, setIsReview] = useState(false)
     const navigate = useNavigate()
@@ -48,7 +48,7 @@ export default function New() {
         taggedGame: gameId || undefined,
         rating: '',
         imageUrl: '',
-        isReview: isReview
+        isReview: isReview,
     }
 
     return (
