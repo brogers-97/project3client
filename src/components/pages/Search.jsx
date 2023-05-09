@@ -106,7 +106,7 @@ export default function Search(props) {
     // }
 
     return (
-        <div>
+        <div className="text-light">
             <div className="search-bar">
                 <form>
                     <input id="search-input" type="text" />

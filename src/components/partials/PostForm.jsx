@@ -1,22 +1,12 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
 
 export default function PostForm(props) {
-    /*{
-        isReview: "boolean",
-        postTitle: "",
-        postBody: "",
-        taggedGame: 1,
-        rating: 0,
-        imageUrl: "false",
-
-    }
-    */
-
-    const [formData, setFormData] = useState(props.initialState)
+    const [formData, setFormData] = useState({ ...props.initialState })
+    // can use this for conditional logic with props.originIsSearch if we decide we'd like to hide fields
     const [postIsAboutGame, setPostIsAboutGame] = useState(true)
 
     const gameOnlyFields = (
@@ -34,14 +24,7 @@ export default function PostForm(props) {
                             disabled
                             size="lg"
                             type="text"
-                            placeholder="tagged game"
-                            value={formData.taggedGame}
-                            onChange={(e) =>
-                                setFormData({
-                                    ...formData,
-                                    taggedGame: e.target.value,
-                                })
-                            }
+                            value={props.initialState.taggedGame}
                         />
                     </Form.Group>
                 </Col>{' '}
@@ -68,13 +51,7 @@ export default function PostForm(props) {
                         type="checkbox"
                         id="isReview"
                         label="review"
-                        checked={formData.isReview}
-                        onChange={(e) =>
-                            setFormData({
-                                ...formData,
-                                isReview: !formData.isReview,
-                            })
-                        }
+                        checked={props.initialState.isReview}
                     />
                 </Col>
             </Row>
@@ -129,8 +106,16 @@ export default function PostForm(props) {
                     />
                 </Form.Group>
                 {postIsAboutGame ? gameOnlyFields : null}
-                <button type="submit">Submit</button>
-                <button onClick={props.handleCancel}> Cancel </button>
+                <button className="btn btn-primary" type="submit">
+                    Submit
+                </button>
+                <button
+                    className="btn btn-primary"
+                    onClick={props.handleCancel}
+                >
+                    {' '}
+                    Cancel{' '}
+                </button>
             </Form>
         </Container>
     )

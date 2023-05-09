@@ -3,9 +3,24 @@ import PostForm from '../partials/PostForm'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import Container from 'react-bootstrap/Container'
+import { useLocation } from 'react-router-dom'
 
 export default function New() {
+    const [originIsSearch, setOriginIsSearch] = useState(false)
+    const [gameName, setGameName] = useState("")
+    const [gameId, setGameId] = useState(undefined)
+    const [isReview, setIsReview] = useState(false)
     const navigate = useNavigate()
+    const location = useLocation()
+
+    useEffect(() => {
+        if (location.state) {
+            setOriginIsSearch(true)
+            setGameName(location.state.gameName)
+            setGameId(location.state.gameId)
+            setIsReview(location.state.isReview)
+        }
+    }, [])
 
     const handleSubmit = async (e, form) => {
         e.preventDefault()
@@ -30,9 +45,10 @@ export default function New() {
     const initialState = {
         postTitle: '',
         postBody: '',
-        taggedGame: 0,
+        taggedGame: gameId || undefined,
         rating: '',
         imageUrl: '',
+        isReview: isReview
     }
 
     return (
@@ -40,6 +56,8 @@ export default function New() {
             <h1>New Post page</h1>
             <Container>
                 <PostForm
+                    originIsSearch={originIsSearch}
+                    gameName={gameName}
                     initialState={initialState}
                     handleSubmit={handleSubmit}
                 />
