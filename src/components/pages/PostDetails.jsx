@@ -10,6 +10,7 @@ import Comments from '../partials/Comments'
 
 export default function PostDetails({ currentUser, setCurrentUser }) {
     const [post, setPost] = useState({})
+    const [author, setAuthor] = useState('')
     const [postLoaded, setPostLoaded] = useState(false)
     const [showForm, setShowForm] = useState(false)
 
@@ -20,7 +21,9 @@ export default function PostDetails({ currentUser, setCurrentUser }) {
         axios
             .get(`${process.env.REACT_APP_SERVER_URL}/posts/${id}`)
             .then((response) => {
-                setPost(response.data)
+                const [responsePost, responseAuthor] = response.data
+                setPost(responsePost)
+                setAuthor(responseAuthor)
                 if (post !== {}) {
                     setPostLoaded(true)
                 }
@@ -46,6 +49,25 @@ export default function PostDetails({ currentUser, setCurrentUser }) {
             // const userPosts = await axios.get(`${process.env.REACT_APP_SERVER_URL}/posts`)
             setPost(response.data)
             setShowForm(false)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const handleDelete = async () => {
+        try {
+            const token = localStorage.getItem('jwt')
+            // make the auth headers
+            const options = {
+                headers: {
+                    Authorization: token,
+                },
+            }
+            await axios.delete(
+                `${process.env.REACT_APP_SERVER_URL}/posts/${id}`,
+                options
+            )
+            navigate('/home')
         } catch (error) {
             console.log(error)
         }
@@ -77,13 +99,26 @@ export default function PostDetails({ currentUser, setCurrentUser }) {
                 <Col md="auto">
                     <Post
                         post={post}
-                        author={'Andrew'}
+                        author={author}
                         currentUser={currentUser}
                         setCurrentUser={setCurrentUser}
                         id={id}
                     />
-                    {/* need to lock this button to the logged-in user if they are the author of the post */}
-                    <button onClick={() => setShowForm(true)}>Edit</button>
+                    {/* first layer of ternary checks whether there's a user loaded in state.  once the current user is loaded in state, second layer of ternary checks whether the logged in user's name matches that of the author.  if so, client shows edit button. 
+                    
+                    with more time, ideally we'd do server side checking to confirm that the logged in user matches the user who wrote the post, as this implementation is susceptible to a user changing state in dev tools to cause the edit button to appear on someone else's post */}
+                    {currentUser ? (
+                        currentUser.name === author ? (
+                            <>
+                                <button onClick={() => setShowForm(true)}>
+                                    Edit
+                                </button>
+                                <button onClick={() => handleDelete()}>
+                                    Delete
+                                </button>
+                            </>
+                        ) : null
+                    ) : null}
                     <Comments
                         currentUser={currentUser}
                         id={id}
