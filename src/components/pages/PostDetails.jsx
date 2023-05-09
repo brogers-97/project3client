@@ -10,6 +10,7 @@ import Comments from '../partials/Comments'
 
 export default function PostDetails({ currentUser, setCurrentUser }) {
     const [post, setPost] = useState({})
+    const [author, setAuthor] = useState("")
     const [postLoaded, setPostLoaded] = useState(false)
     const [showForm, setShowForm] = useState(false)
 
@@ -20,7 +21,9 @@ export default function PostDetails({ currentUser, setCurrentUser }) {
         axios
             .get(`${process.env.REACT_APP_SERVER_URL}/posts/${id}`)
             .then((response) => {
-                setPost(response.data)
+                const [responsePost, responseAuthor] = response.data
+                setPost(responsePost)
+                setAuthor(responseAuthor)
                 if (post !== {}) {
                     setPostLoaded(true)
                 }
@@ -77,13 +80,15 @@ export default function PostDetails({ currentUser, setCurrentUser }) {
                 <Col md="auto">
                     <Post
                         post={post}
-                        author={'Andrew'}
+                        author={author}
                         currentUser={currentUser}
                         setCurrentUser={setCurrentUser}
                         id={id}
                     />
                     {/* need to lock this button to the logged-in user if they are the author of the post */}
+                    {true ? 
                     <button onClick={() => setShowForm(true)}>Edit</button>
+                    : null}
                     <Comments
                         currentUser={currentUser}
                         id={id}
