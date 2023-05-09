@@ -13,8 +13,7 @@ export default function Profile({ currentUser, handleLogout }) {
     const [usersPosts, setUsersPosts] = useState([])
     const [userId, setUserId] = useState(null)
     const navigate = useNavigate()
-    const [favorites, setFavorites] = useState([])
-
+    const [favoriteGames, setFavoriteGames] = useState([])
 
     // useEffect for getting the user data and checking auth
     useEffect(() => {
@@ -52,7 +51,7 @@ export default function Profile({ currentUser, handleLogout }) {
     useEffect(() => {
         if (userId) {
             const url = `${process.env.REACT_APP_SERVER_URL}/users/posts?userId=${userId}`
-            console.log(url)
+            // console.log(url)
             axios
                 .get(url)
                 .then((response) => {
@@ -66,16 +65,22 @@ export default function Profile({ currentUser, handleLogout }) {
     }, [userId])
 
     useEffect(() => {
-        axios
-            .get(`${process.env.REACT_APP_SERVER_URL}/profile`)
-            .then((response) => {
-                const userData = response.data
-                setFavorites(userData)
-            })
-            .catch((error) => {
-                console.error(error)
-            })
-    }, [])
+        // Fetch the favoriteGames data from the server when the component mounts
+        if(userId) {
+            axios
+                .get(`${process.env.REACT_APP_SERVER_URL}/users/favorites?userId=${userId}`)
+                .then((response) => {
+                    // Update the component state with the favoriteGames data
+                    // console.log(response.data.favoriteGames)
+                    setFavoriteGames(response.data.favoriteGames)
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
+            }
+    }, [userId])
+
+    
 
     const renderPost = usersPosts.map((post, i) => {
         return <Post key={i} post={post} />
@@ -92,6 +97,7 @@ export default function Profile({ currentUser, handleLogout }) {
 
                 <div className="favorites">
                     <div className="favorite-game"></div>
+                    {/* <p>{renderFavorites}</p> */}
                 </div>
 
                 <div className="reviews">
