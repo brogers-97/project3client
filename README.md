@@ -3,6 +3,8 @@
 ## Summary 
 * Discover a social media app tailored for passionate video game enthusiasts! Immerse yourself in a vibrant gaming community where you can manage your favorite games, express your opinions through comments, reviews, and ratings. Keep a finger on the pulse of the gaming world, staying updated on conversations that fuel your interests. Unleash your inner gamer and experience the world of gaming like never before with this fun and interactive social media app!
 
+Link to Application: https://main--playful-arithmetic-40d56a.netlify.app
+
 Backend repo located [here](https://github.com/jaronw1/project3server).
 
 ## API 
