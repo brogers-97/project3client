@@ -117,7 +117,7 @@ export default function PostDetails({ currentUser, setCurrentUser }) {
         </>
     )
 
-    const postView = <>{postLoaded ? loaded : loading}</>
+    const postView = <div className="pt-4">{postLoaded ? loaded : loading}</div>
 
     const formView = (
         <>

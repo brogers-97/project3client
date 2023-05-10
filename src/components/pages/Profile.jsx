@@ -92,13 +92,13 @@ export default function Profile({ currentUser, handleLogout }) {
     })
 
     return (
-        <div className="profile-container">
+        <div className="profile-container text-light">
             <div className="profile-left">
                 <h1>Hello {currentUser?.name}</h1>
 
                 <h2 className='title'>My Favorites</h2>
 
-                <div className="favorites">
+                <div className="favorites bg-primary">
                     <div className="inner-favorites">
                         {renderFavorites}
                     </div>
@@ -106,13 +106,13 @@ export default function Profile({ currentUser, handleLogout }) {
 
                 <h2 className='title'>My Reviews</h2>
 
-                <div className="reviews">
+                <div className="reviews bg-primary">
                     <ul>{renderReviews}</ul>
                 </div>
             </div>
 
-            <div className="profile-post">
-                <div className="post-container">{renderPost}</div>
+            <div className="profile-post bg-secondary">
+                <div className="post-container mt-4">{renderPost}</div>
             </div>
             <div>
                 <Setting currentUser={currentUser} />
