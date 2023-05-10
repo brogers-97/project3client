@@ -9,6 +9,7 @@ export default function New() {
     const [originIsSearch, setOriginIsSearch] = useState(false)
     const [gameName, setGameName] = useState('')
     const [gameId, setGameId] = useState(undefined)
+    const [gameImage, setGameImage] = useState(undefined)
     const [isReview, setIsReview] = useState(false)
     const navigate = useNavigate()
     const location = useLocation()
@@ -17,6 +18,7 @@ export default function New() {
         if (location.state) {
             setOriginIsSearch(true)
             setGameName(location.state.gameName)
+            setGameImage(location.state.gameImage)
             setGameId(location.state.gameId)
             setIsReview(location.state.isReview)
         }
@@ -47,7 +49,7 @@ export default function New() {
         postBody: '',
         taggedGame: gameId || undefined,
         rating: '',
-        imageUrl: '',
+        imageUrl: gameImage || '',
         isReview: isReview,
     }
 
