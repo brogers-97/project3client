@@ -32,12 +32,12 @@ export default function Comments({ currentUser, id, comments }) {
     }
 
     return (
-        <>
-            <Form onSubmit={(e) => handleSubmit(e, formData)}>
+        <div className='card bg-primary text-light mb-4'>
+            <Form className="w-75 mx-auto" onSubmit={(e) => handleSubmit(e, formData)}>
                 <Form.Label htmlFor="content">Comments:</Form.Label>
                 <Form.Control
                     as="textarea"
-                    placeholder="enter comment"
+                    placeholder="Join the discussion!"
                     id="content"
                     value={formData.content}
                     onChange={(e) =>
@@ -52,10 +52,9 @@ export default function Comments({ currentUser, id, comments }) {
             </Form>
             {commentsArray.map((comment) => (
                 <div key={comment.id}>
-                    <p>{comment.content}</p>
-                    <p>Posted by: {comment.postedBy}</p>
+                    <p><span className='fw-bold'>{comment.postedBy}:</span> {comment.content}</p>
                 </div>
             ))}
-        </>
+        </div>
     )
 }

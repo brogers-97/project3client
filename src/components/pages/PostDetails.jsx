@@ -74,7 +74,7 @@ export default function PostDetails({ currentUser, setCurrentUser }) {
     }
 
     const loading = (
-        <div>
+        <div className='text-light'>
             <h2>loading post...</h2>
         </div>
     )
@@ -96,14 +96,14 @@ export default function PostDetails({ currentUser, setCurrentUser }) {
                     with more time, ideally we'd do server side checking to confirm that the logged in user matches the user who wrote the post, as this implementation is susceptible to a user changing state in dev tools to cause the edit button to appear on someone else's post */}
                     {currentUser ? (
                         currentUser.name === author ? (
-                            <>
+                            <div className='mb-4'>
                                 <button onClick={() => setShowForm(true)}>
                                     Edit
                                 </button>
                                 <button onClick={() => handleDelete()}>
                                     Delete
                                 </button>
-                            </>
+                            </div>
                         ) : null
                     ) : null}
                     <Comments
