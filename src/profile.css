@@ -42,11 +42,25 @@
 }
 .favorites{
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    overflow-y: auto;
+    height:200px;
+    margin: 15px auto;
 }
 .favorite-game{
     border: 1px solid black;
     height: 80px;
     width: 80px;
+}
+.my-favorites{
+    border-bottom: 1px solid black;
+}
+.title{
+    text-decoration: underline;
+    color: white;
+    margin: 5px;
+}
+.inner-favorites{
+    height: 85%;
 }
