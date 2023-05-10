@@ -110,6 +110,7 @@ export default function Details(props) {
                                     state: {
                                         origin: 'search',
                                         gameName: props.gameDetails.name,
+                                        gameImage: props.gameDetails.background_image,
                                         gameId: props.gameDetails.id,
                                         isReview: false,
                                     },
@@ -125,6 +126,7 @@ export default function Details(props) {
                                     state: {
                                         origin: 'search',
                                         gameName: props.gameDetails.name,
+                                        gameImage: props.gameDetails.background_image,
                                         gameId: props.gameDetails.id,
                                         isReview: true,
                                     },

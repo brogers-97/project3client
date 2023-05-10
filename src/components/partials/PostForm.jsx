@@ -1,13 +1,17 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
 
 export default function PostForm(props) {
-    const [formData, setFormData] = useState({ ...props.initialState })
+    const [formData, setFormData] = useState({})
     // can use this for conditional logic with props.originIsSearch if we decide we'd like to hide fields
     const [postIsAboutGame, setPostIsAboutGame] = useState(true)
+
+    useEffect(() => {
+        setFormData({ ...props.initialState })
+    }, [formData.imageUrl])
 
     const gameOnlyFields = (
         <>
@@ -24,7 +28,7 @@ export default function PostForm(props) {
                             disabled
                             size="lg"
                             type="text"
-                            value={props.initialState.taggedGame}
+                            value={formData.taggedGame}
                         />
                     </Form.Group>
                 </Col>{' '}
@@ -51,7 +55,7 @@ export default function PostForm(props) {
                         type="checkbox"
                         id="isReview"
                         label="review"
-                        checked={props.initialState.isReview}
+                        checked={formData.isReview}
                     />
                 </Col>
             </Row>
