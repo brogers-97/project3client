@@ -83,7 +83,7 @@ export default function Details(props) {
     return (
         <div>
             {!props.gameDetails ? (
-                <h1>no Details</h1>
+                <h2>Search For A Game</h2>
             ) : (
                 <div className="game-div">
                     <h1>{props.gameDetails.name}</h1>
