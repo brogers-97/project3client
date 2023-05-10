@@ -46,7 +46,7 @@ export default function Details(props) {
     const handleFavoriteClick = async () => {
         const url = `${process.env.REACT_APP_SERVER_URL}/users`
         const gameIndex = currentUser.favoriteGames.indexOf(
-            props.gameDetails.id
+            props.gameDetails.name
         )
         let updatedFavoriteGames
 
@@ -58,7 +58,7 @@ export default function Details(props) {
         } else {
             updatedFavoriteGames = [
                 ...currentUser.favoriteGames,
-                props.gameDetails.id,
+                props.gameDetails.name,
             ]
         }
         let updatedUser = {
@@ -66,6 +66,7 @@ export default function Details(props) {
             favoriteGames: updatedFavoriteGames,
         }
         setCurrentUser(updatedUser)
+        console.log(updatedUser)
 
         try {
             const options = {
@@ -97,7 +98,7 @@ export default function Details(props) {
                             onClick={handleFavoriteClick}
                         >
                             {currentUser.favoriteGames.includes(
-                                props.gameDetails.id
+                                props.gameDetails.name
                             )
                                 ? 'Un-favorite'
                                 : 'favorite'}
