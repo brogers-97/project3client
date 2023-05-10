@@ -5,13 +5,20 @@ import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
 
 export default function PostForm(props) {
-    const [formData, setFormData] = useState({})
+    const [formData, setFormData] = useState({
+        postTitle: "",
+        postBody: "",
+        imageUrl: "",
+        taggedGame: "",
+        rating: "",
+        isReview: false,
+    })
     // can use this for conditional logic with props.originIsSearch if we decide we'd like to hide fields
     const [postIsAboutGame, setPostIsAboutGame] = useState(true)
 
     useEffect(() => {
         setFormData({ ...props.initialState })
-    }, [formData.imageUrl])
+    }, [props.initialState])
 
     const gameOnlyFields = (
         <>
@@ -56,6 +63,12 @@ export default function PostForm(props) {
                         id="isReview"
                         label="review"
                         checked={formData.isReview}
+                        onChange={(e) =>
+                            setFormData({
+                                ...formData,
+                                isReview: e.target.checked,
+                            })
+                        }
                     />
                 </Col>
             </Row>
