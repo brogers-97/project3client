@@ -79,6 +79,10 @@ export default function Profile({ currentUser, handleLogout }) {
         }
     }, [userId])
 
+    const renderFavorites = favoriteGames.map((game, i)=> {
+        return <p style={{margin: '2px'}} key={i}>{game}</p>
+    })
+
     const renderPost = usersPosts.map((post, i) => {
         return <Post key={i} post={post} />
     })
@@ -92,15 +96,17 @@ export default function Profile({ currentUser, handleLogout }) {
             <div className="profile-left">
                 <h1>Hello {currentUser?.name}</h1>
 
+                <h2 className='title'>My Favorites</h2>
+
                 <div className="favorites">
-                    <div className="favorite-game"></div>
-                    {/* <p>{renderFavorites}</p> */}
+                    <div className="inner-favorites">
+                        {renderFavorites}
+                    </div>
                 </div>
 
+                <h2 className='title'>My Reviews</h2>
+
                 <div className="reviews">
-                    <div className="recent-reviews">
-                        <h2>Recent Reviews</h2>
-                    </div>
                     <ul>{renderReviews}</ul>
                 </div>
             </div>
