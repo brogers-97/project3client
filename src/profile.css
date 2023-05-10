@@ -9,6 +9,7 @@
     width: 50%;
     border-left: 1px solid black;
     background-color: #807b71;
+    overflow-y: auto;
 }
 .profile-left{
     width: 50%;
@@ -63,4 +64,13 @@
 }
 .inner-favorites{
     height: 85%;
+    border: none;
+}
+.favorites::-webkit-scrollbar {
+    width: 0;
+    background-color: transparent;
+}
+.profile-post::-webkit-scrollbar {
+    width: 0;
+    background-color: transparent;
 }
