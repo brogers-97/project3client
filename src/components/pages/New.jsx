@@ -55,8 +55,7 @@ export default function New() {
 
     return (
         <div>
-            <h1>New Post page</h1>
-            <Container>
+            <Container className='pt-4'>
                 <PostForm
                     originIsSearch={originIsSearch}
                     gameName={gameName}
