@@ -79,9 +79,9 @@ export default function Profile({ currentUser, handleLogout }) {
         }
     }, [userId])
 
-    const renderFavorites = favoriteGames.map((game, i)=> {
+    const renderFavorites = favoriteGames?.length > 0 ? favoriteGames.map((game, i)=> {
         return <p style={{margin: '2px'}} key={i}>{game}</p>
-    })
+    }): null;
 
     const renderPost = usersPosts.map((post, i) => {
         return <Post key={i} post={post} />
